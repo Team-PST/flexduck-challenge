@@ -28,15 +28,6 @@ function Game() {
   //set location here
   //if the num is 5 ducky location changes to 5
 
-  useEffect(
-    function checkIfPreview() {
-      async function checkPreview() {
-        setPreviewGridBool(false);
-      }
-      checkPreview();
-    },
-    [preViewGridBool]
-  );
   //this is if it is just down
   const moveDuckDown = () => {
     createBridgeDown(die, grid, duckyLocation);
@@ -78,9 +69,14 @@ function Game() {
   }
 
   const moveDuckRightPreview = () => {
+    const tempGrid = [];
+    for (let row of grid) {
+      tempGrid.push([...row]);
+    }
+
     const { newGrid, coordinates } = createBridgeRight(
       die,
-      grid,
+      tempGrid,
       duckyLocation
     );
     //console.log(createBridgeDown(die, grid, duckyLocation));
@@ -89,15 +85,11 @@ function Game() {
     setPreviewGridBool(true);
     // setGrid(newGrid);
     // alert("does this work");
-    console.log(preViewGridBool);
   };
 
   function removePreview() {
     setPreviewGrid();
     setPreviewGridBool(false);
-    preViewGridBool
-      ? console.log("bool is true", preViewGridBool)
-      : console.log("bool is false");
   }
 
   function showDuckyLocation() {
