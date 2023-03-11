@@ -24,3 +24,11 @@
 .gameboardrow{
     background:purple;
 }
+
+.ducky {
+    background: yellow;
+    width:50px;
+    height:50px;
+    border: 1px solid yellow;
+
+}
