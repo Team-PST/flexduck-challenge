@@ -1,8 +1,14 @@
 import React from "react";
-import GameBoardCell from "./GameBoardCell";
+import GameBoardRow from "./GameBoardRow";
+import "../style/GameBoard.css";
 function GameBoard({ grid }) {
-  // grid.map(row.map)
-  return <GameBoardCell />;
+  return (
+    <div className="grid">
+      {grid.map((row, index) => (
+        <GameBoardRow key={index} row={row} y={index} />
+      ))}
+    </div>
+  );
 }
 
 export default GameBoard;

@@ -1,5 +1,5 @@
 import "./App.css";
-import GameBoard from "./components/GameBoard";
+import Game from "./components/Game";
 
 function App() {
   // const [userData, setUserData] =
@@ -24,7 +24,7 @@ function App() {
         flexbox directions through justify content, align items and
         flex-direction
       </p>
-      <GameBoard />
+      <Game />
     </div>
   );
 }

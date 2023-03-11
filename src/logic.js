@@ -88,7 +88,7 @@ function createBridgeRight(num, grid, coordinates) {
   return { grid, coordinates };
 }
 
-export default {
+export {
   createBridgeDown,
   createBridgeLeft,
   createBridgeUp,

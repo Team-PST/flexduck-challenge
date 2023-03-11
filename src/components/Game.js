@@ -9,13 +9,13 @@ import {
 import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
+  const initialGrid = createGrid(25, 25);
   //might be able to combine game state into a single object
   //but keeping concerns separated for now
-  const [grid, setGrid] = useState(); //maybe use useMemo for optimization?
+  const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([]);
   const [duckyLocation, setDuckyLocation] = useState([start]);
-
   //game reset function
   //update grid,
   //
