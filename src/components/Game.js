@@ -26,6 +26,7 @@ function Game() {
   //set location here
   //if the num is 5 ducky location changes to 5
 
+  //this is if it is just down
   const moveDuck = () => {
     createBridgeDown(die, grid, duckyLocation);
     //console.log(createBridgeDown(die, grid, duckyLocation));
