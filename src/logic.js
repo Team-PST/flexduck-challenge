@@ -93,4 +93,5 @@ export default {
   createBridgeLeft,
   createBridgeUp,
   createBridgeRight,
+  createGrid,
 };
