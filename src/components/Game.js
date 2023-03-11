@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  createBridgeDown,
+  previewDownLocations,
   createBridgeRight,
   createBridgeLeft,
   createBridgeUp,
@@ -11,11 +11,10 @@ import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
   //initializing grid 5x5
-  const initialGrid = createGrid(5, 5);
+  const initialGrid = createGrid(25, 25);
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
-  const [preViewGrid, setPreviewGrid] = useState();
-  const [preViewGridBool, setPreviewGridBool] = useState(false);
+  const [previewLocations, setPreviewLocations] = useState();
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([]);
   const [duckyLocation, setDuckyLocation] = useState(start);
@@ -25,73 +24,77 @@ function Game() {
   //set location here
   //if the num is 5 ducky location changes to 5
 
+  /*preview: manipulate coordinates based on css and show them on a z-index: 2
+    with the preview having transluscent property, upon submit, we'll change the
+    grid accordingly. 
+    option 1: ducky's steps has to be in numerical order
+    option 2: dont make it numerical and have either the start or end start on
+              ducky location  */
+
   //this is if it is just down
-  const moveDuckDown = () => {
+  //requirements: preview location array state.
+  async function previewDown() {
     //using createBridge down from the logic.js file
-    createBridgeDown(die, grid, duckyLocation);
-    setDuckyLocation(createBridgeDown(die, grid, duckyLocation).coordinates);
-  };
+    const previewCoordinates = await previewDownLocations(die, duckyLocation);
+    setPreviewLocations(previewCoordinates);
+    console.log(previewLocations);
+    // setDuckyLocation(previewDown(die, grid, duckyLocation).coordinates);
+  }
 
   //moves duck down and is set to the number of spots rolled by the die
-  const moveDuckUp = () => {
-    createBridgeUp(die, grid, duckyLocation);
-    setDuckyLocation(createBridgeUp(die, grid, duckyLocation).coordinates);
-  };
+  // const moveDuckUp = () => {
+  //   createBridgeUp(die, grid, duckyLocation);
+  //   setDuckyLocation(createBridgeUp(die, grid, duckyLocation).coordinates);
+  // };
 
-  //moves duck left and is set to the number of spots rolled by the die
-  const moveDuckLeft = () => {
-    createBridgeLeft(die, grid, duckyLocation);
-    setDuckyLocation(createBridgeLeft(die, grid, duckyLocation).coordinates);
-  };
+  // //moves duck left and is set to the number of spots rolled by the die
+  // const moveDuckLeft = () => {
+  //   createBridgeLeft(die, grid, duckyLocation);
+  //   setDuckyLocation(createBridgeLeft(die, grid, duckyLocation).coordinates);
+  // };
 
-  //moves duck right and is set to the number of spots rolled by the die
-  const moveDuckRight = () => {
-    const { newGrid, coordinates } = createBridgeRight(
-      die,
-      grid,
-      duckyLocation
-    );
-    setDuckyLocation(coordinates);
-    setGrid(newGrid);
-    console.log();
-  };
+  // //moves duck right and is set to the number of spots rolled by the die
+  // const moveDuckRight = () => {
+  //   const { newGrid, coordinates } = createBridgeRight(
+  //     die,
+  //     grid,
+  //     duckyLocation
+  //   );
+  //   setDuckyLocation(coordinates);
+  //   setGrid(newGrid);
+  //   console.log();
+  // };
 
   function showDuckyLocation() {
     console.log(duckyLocation);
     console.log("grid", grid);
   }
 
-  //preview what it would be like if the duck moved right as set per the die
-  const moveDuckRightPreview = () => {
-    //need to create a temp grid array
-    const tempGrid = [];
-    //use a for loop to loop through the rows of the array and push the temp grid to the spread rows
-    for (let row of grid) {
-      tempGrid.push([...row]);
-    }
+  // //preview what it would be like if the duck moved right as set per the die
+  // const moveDuckRightPreview = () => {
+  //   //need to create a temp grid array
+  //   const tempGrid = [];
+  //   //use a for loop to loop through the rows of the array and push the temp grid to the spread rows
+  //   for (let row of grid) {
+  //     tempGrid.push([...row]);
+  //   }
 
-    //set the placement of the ducky and the cordinates on the temp
-    const { newGrid, coordinates } = createBridgeRight(
-      die,
-      tempGrid,
-      duckyLocation
-    );
+  //   //set the placement of the ducky and the cordinates on the temp
+  //   const { newGrid, coordinates } = createBridgeRight(
+  //     die,
+  //     tempGrid,
+  //     duckyLocation
+  //   );
 
-    setPreviewGrid(newGrid);
-    setPreviewGridBool(true);
-  };
-
-  function removePreview() {
-    setPreviewGrid();
-    setPreviewGridBool(false);
-  }
+  //   setPreviewGrid(newGrid);
+  //   setPreviewGridBool(true);
+  // };
 
   //
   function showDuckyLocation() {
     console.log(duckyLocation);
     console.log("grid", grid);
-    console.log(preViewGrid);
-    console.log(preViewGridBool);
+    console.log(previewLocations);
   }
 
   //function for getting input from form
@@ -114,21 +117,12 @@ function Game() {
     <>
       <div>
         <h1>Game Goes Here!</h1>
-        {preViewGridBool ? (
-          <GameBoard
-            className="grid"
-            grid={preViewGrid}
-            duckyLocation={duckyLocation}
-            preview={true}
-          />
-        ) : (
-          <GameBoard
-            className="grid"
-            grid={grid}
-            duckyLocation={duckyLocation}
-            preview={false}
-          />
-        )}
+        <GameBoard
+          className="grid"
+          grid={grid}
+          duckyLocation={duckyLocation}
+          previewLocations={previewLocations}
+        />
       </div>
       <form className="form" onSubmit={pullForm}>
         <p className="inputformTop ">display:flex;</p>
@@ -153,13 +147,13 @@ function Game() {
 
       <br />
       <br />
-      <button onClick={moveDuckDown}>Button Down</button>
-      <button onClick={moveDuckRightPreview}>right preview</button>
+      <button onClick={previewDown}>Button Down</button>
+      {/* <button onClick={moveDuckRightPreview}>right preview</button>
       <button onClick={moveDuckRight}>Button Right</button>
       <button onClick={moveDuckLeft}>Button Left</button>
       <button onClick={moveDuckUp}>Button Up</button>
       <button onClick={showDuckyLocation}>reveal Location</button>
-      <button onClick={removePreview}>remove preview</button>
+      <button onClick={removePreview}>remove preview</button> */}
     </>
   );
 }

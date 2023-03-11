@@ -55,15 +55,16 @@ function createBridgeUp(num, grid, coordinates) {
   return { grid, coordinates };
 }
 
-function createBridgeDown(num, grid, coordinates) {
+//prototype for preview
+function previewDownLocations(num, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
+  const preview = [];
   const destinationY = y + num;
   for (let i = y + 1; i <= destinationY; i++) {
-    grid[i][x] = 1;
+    preview.push([i, x]);
   }
-  coordinates = [destinationY, x];
-  return { grid, coordinates };
+  return preview;
 }
 
 function createBridgeLeft(num, grid, coordinates) {
@@ -90,7 +91,7 @@ function createBridgeRight(num, grid, coordinates) {
 }
 
 export {
-  createBridgeDown,
+  previewDownLocations,
   createBridgeLeft,
   createBridgeUp,
   createBridgeRight,
