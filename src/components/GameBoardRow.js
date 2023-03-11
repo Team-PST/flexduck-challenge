@@ -3,7 +3,13 @@ import GameBoardCell from "./GameBoardCell";
 
 function GameBoardRow({ row, y }) {
   return row.map((cell, index) => (
-    <GameBoardCell key={index} value={cell} y={y} x={index} />
+    <GameBoardCell
+      className="gameboardrow"
+      key={index}
+      value={cell}
+      y={y}
+      x={index}
+    />
   ));
 }
 
