@@ -20,7 +20,9 @@ function GameBoard({ grid }) {
   return (
     <div>
       {grid.map((row, index) => (
-        <GameBoardRow key={index} row={row} y={index} />
+        <div>
+          <GameBoardRow key={index} row={row} y={index} />
+        </div>
       ))}
     </div>
   );

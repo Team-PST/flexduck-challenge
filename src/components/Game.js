@@ -24,7 +24,7 @@ function Game() {
     <div>
       {/* stuff */}
       <h1>Game Goes Here!</h1>
-      <GameBoard grid={grid} />
+      <GameBoard className="grid" grid={grid} />
     </div>
   );
 }

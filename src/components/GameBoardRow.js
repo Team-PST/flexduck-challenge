@@ -3,9 +3,7 @@ import GameBoardCell from "./GameBoardCell";
 
 function GameBoardRow({ row, y }) {
   return row.map((cell, index) => (
-    <div>
-      <GameBoardCell key={index} value={cell} y={y} x={index} />
-    </div>
+    <GameBoardCell key={index} value={cell} y={y} x={index} />
   ));
 }
 
