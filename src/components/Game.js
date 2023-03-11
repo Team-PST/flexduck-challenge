@@ -70,7 +70,7 @@ function Game() {
       tempGrid.push([...row]);
     }
 
-    //set the placement of the ducky and the cordinates on the tempGrid
+    //set the placement of the ducky and the cordinates on the temp
     const { newGrid, coordinates } = createBridgeRight(
       die,
       tempGrid,
