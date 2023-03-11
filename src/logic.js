@@ -81,11 +81,12 @@ function createBridgeRight(num, grid, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
   const destinationX = x + num;
-  for (let i = x + 1; i > destinationX; i++) {
+  for (let i = x; i <= destinationX; i++) {
     grid[y][i] = 1;
   }
+  const newGrid = grid;
   coordinates = [y, destinationX];
-  return { grid, coordinates };
+  return { newGrid, coordinates };
 }
 
 export {

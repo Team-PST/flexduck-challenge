@@ -6,7 +6,7 @@
 .gameboard{
     width: 400px;
     height:400px;
-    //background:black;
+    /* background:black; */
 }
 
 .gameboard-div{
@@ -27,6 +27,20 @@
 
 .ducky {
     background: yellow;
+    width:50px;
+    height:50px;
+    border: 1px solid yellow;
+
+}
+.bridge {
+    background: rgb(197, 92, 11);
+    width:50px;
+    height:50px;
+    border: 1px solid yellow;
+
+}
+.preview {
+    background: rgb(0, 252, 210);
     width:50px;
     height:50px;
     border: 1px solid yellow;

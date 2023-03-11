@@ -2,7 +2,7 @@ import React from "react";
 import GameBoardRow from "./GameBoardRow";
 import "../style/GameBoard.css";
 
-function GameBoard({ grid, duckyLocation }) {
+function GameBoard({ grid, duckyLocation, preview }) {
   return (
     <div className="gameboard">
       {grid.map((row, index) => (
@@ -12,6 +12,7 @@ function GameBoard({ grid, duckyLocation }) {
             row={row}
             y={index}
             duckyLocation={duckyLocation}
+            preview={preview}
           />
         </div>
       ))}
