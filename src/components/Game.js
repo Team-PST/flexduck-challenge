@@ -9,7 +9,7 @@ import {
 import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
-  const initialGrid = createGrid(25, 25);
+  const initialGrid = createGrid(5, 5);
   //might be able to combine game state into a single object
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
