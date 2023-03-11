@@ -6,14 +6,18 @@
 .gameboard{
     width: 400px;
     height:400px;
-    /* background:black; */
+    margin: 0 auto;
 }
 
 .gameboard-div{
     display:flex;
+    justify-content: center;
+    align-items: center;
     
 }
 
+//style water gameboardcells to look like water
+//make add an animation so they look like waves
 .gameboardcell {
     width:50px;
     height:50px;
@@ -25,6 +29,7 @@
     background:purple;
 }
 
+//please styling ducky with css to look like a duck
 .ducky {
     background: yellow;
     width:50px;
@@ -46,3 +51,46 @@
     border: 1px solid yellow;
 
 }
+.form {
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
+   align-items:center;
+     
+}
+
+.inputformTop {
+    margin:0;
+    border-top:1px solid black;
+    width: 304px;
+    font-size: 1rem;
+    border-right:1px solid black;
+    border-left:1px solid black;
+
+}
+
+.inputformBot {
+    margin:0;
+    border-bottom:1px solid black;
+}
+
+.inputText {
+    font-size: 1rem;
+    border-right:1px solid black;
+    border-left:1px solid black;
+    width: 300px;
+
+}
+
+input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    border: 0px solid;
+
+  }
+  
+  .no-outline:focus {
+    outline: none;
+  }

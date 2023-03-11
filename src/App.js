@@ -2,19 +2,6 @@ import "./App.css";
 import Game from "./components/Game";
 
 function App() {
-  // const [userData, setUserData] =
-  //   useState();
-  //   localStorage.getItem(/* What are we naming the userdata */)
-
-  // useEffect(function getData() {
-  //   function addToLocal() {
-  //     if (Object.keys(userData).length === 0) {
-  //       // do stuff like set userData
-  //     }
-  //   }
-  //   addToLocal();
-  // }, []);
-
   return (
     <div>
       <h1>Welcome to Flexduck Challenge!</h1>
