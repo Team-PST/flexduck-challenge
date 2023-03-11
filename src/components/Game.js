@@ -5,7 +5,7 @@ import {
   createBridgeRight,
   createBridgeUp,
   createGrid,
-} from "./logic";
+} from "../logic";
 import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {

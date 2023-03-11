@@ -1,9 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
-import RouteList from "./RouteList";
-import NavBar from "./NavBar";
-import { useEffect, useState } from "react";
+import GameBoard from "./components/GameBoard";
+
 function App() {
   // const [userData, setUserData] =
   //   useState();
@@ -19,13 +16,15 @@ function App() {
   // }, []);
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <NavBar />
-        <div>
-          <RouteList />
-        </div>
-      </BrowserRouter>
+    <div>
+      <h1>Welcome to Flexduck Challenge!</h1>
+      <p>
+        Flexduck was created to teach new front-end developers of how to utilize
+        the css layout model, flexbox. With this game, we will teach you the
+        flexbox directions through justify content, align items and
+        flex-direction
+      </p>
+      <GameBoard />
     </div>
   );
 }
