@@ -1,5 +1,8 @@
+@use './styles/partials/reset' as *;
+
 .grid {
-    /* display: flex; */
+    /* display: flex;
+    flex-direction:column */
 
 }
 
@@ -95,4 +98,18 @@ input {
   
   .no-outline:focus {
     outline: none;
+  }
+
+  .main {
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .gameboard-grid{
+    dipslay:flex;
+    flex-direction:column;
+  }
+
+  .rules {
+    width: 40%;
   }

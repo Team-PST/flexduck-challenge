@@ -1,6 +1,7 @@
 import "./App.css";
 import Game from "./components/Game";
 import Rules from "./components/Rules";
+import "./style/GameBoard.css";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
         flexbox directions through justify content, align items and
         flex-direction
       </p>
-
-      <Rules />
-      <Game />
+      <div className="main">
+        <Rules />
+        <Game />
+      </div>
     </div>
   );
 }

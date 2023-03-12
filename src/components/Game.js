@@ -11,7 +11,7 @@ import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
   //initializing grid 5x5
-  const initialGrid = createGrid(25, 25);
+  const initialGrid = createGrid(5, 5);
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
   const [previewLocations, setPreviewLocations] = useState();
@@ -115,45 +115,47 @@ function Game() {
 
   return (
     <>
-      <div>
-        <h1>Game Goes Here!</h1>
-        <GameBoard
-          className="grid"
-          grid={grid}
-          duckyLocation={duckyLocation}
-          previewLocations={previewLocations}
-        />
-      </div>
-      <form className="form" onSubmit={pullForm}>
-        <p className="inputformTop ">display:flex;</p>
-        <input
-          className="inputform inputText"
-          name="flexDirection"
-          placeholder="flex-direction:"
-        ></input>
-        <input
-          className="inputform inputText"
-          name="flexJustify"
-          placeholder="justify-content:"
-        ></input>
-        <input
-          className="inputformBot inputText"
-          name="flexAlign"
-          placeholder="align-items:"
-        ></input>
+      <div className="gameboard-grid">
+        <div>
+          <h1>Game Goes Here!</h1>
+          <GameBoard
+            className="grid"
+            grid={grid}
+            duckyLocation={duckyLocation}
+            previewLocations={previewLocations}
+          />
+        </div>
+        <form className="form" onSubmit={pullForm}>
+          <p className="inputformTop ">display:flex;</p>
+          <input
+            className="inputform inputText"
+            name="flexDirection"
+            placeholder="flex-direction:"
+          ></input>
+          <input
+            className="inputform inputText"
+            name="flexJustify"
+            placeholder="justify-content:"
+          ></input>
+          <input
+            className="inputformBot inputText"
+            name="flexAlign"
+            placeholder="align-items:"
+          ></input>
 
-        <button type="submit">Next</button>
-      </form>
+          <button type="submit">Next</button>
+        </form>
 
-      <br />
-      <br />
-      <button onClick={previewDown}>Button Down</button>
-      {/* <button onClick={moveDuckRightPreview}>right preview</button>
+        <br />
+        <br />
+        <button onClick={previewDown}>Button Down</button>
+        {/* <button onClick={moveDuckRightPreview}>right preview</button>
       <button onClick={moveDuckRight}>Button Right</button>
       <button onClick={moveDuckLeft}>Button Left</button>
       <button onClick={moveDuckUp}>Button Up</button>
       <button onClick={showDuckyLocation}>reveal Location</button>
       <button onClick={removePreview}>remove preview</button> */}
+      </div>
     </>
   );
 }
