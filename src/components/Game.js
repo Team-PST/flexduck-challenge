@@ -89,6 +89,30 @@ function Game() {
     console.log(data);
   }
 
+  //function to verfiyDirection
+  function verfiyDirection(event) {
+    //event.target.value == "column?"
+    event.preventDefault();
+    //information for flexDiretion
+    const data = event.target.flexDirection.value;
+    //if there is flex-direction then look at the other value after the :
+    if (data.split(":")[0] === "flex-direction") {
+      if (data.split(":")[1] === "row") {
+        //duck can only move left or right
+        //use a state?
+      } else if (data.split(":")[1] === "column") {
+        //duck moves down
+        //use a state
+      } else {
+        //Next button cannot be pressed
+      }
+    } else {
+      //else
+    }
+    //else return alert you need flex direction
+    console.log(data);
+  }
+
   return (
     <>
       <div>
@@ -106,7 +130,7 @@ function Game() {
           className="inputform inputText"
           name="flexDirection"
           placeholder="flex-direction:"
-          onChange={verifyForm}
+          onChange={verfiyDirection}
         ></input>
         <input
           className="inputform inputText"
