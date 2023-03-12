@@ -64,7 +64,7 @@ function previewDownLocations(num, coordinates) {
   for (let i = y + 1; i <= destinationY; i++) {
     preview.push([i, x]);
   }
-  return preview;
+  return preview; //[[1,0][2, 0]....]
 }
 
 function createBridgeLeft(num, grid, coordinates) {

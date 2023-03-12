@@ -11,15 +11,15 @@ import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
   //initializing grid 5x5
-  const initialGrid = createGrid(25, 25);
+  const initialGrid = createGrid(5, 5);
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
-  const [previewLocations, setPreviewLocations] = useState();
+  const [previewLocations, setPreviewLocations] = useState([[]]);
   const [start, setStart] = useState([0, 0]);
-  const [finishCoordinates, setFinishCoordinates] = useState([]);
+  const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
   const [duckyLocation, setDuckyLocation] = useState(start);
   const [die, setDie] = useState(4);
-
+  const [turnsTaken, setTurnsTaken] = useState(0);
   function updateBoard() {}
   //set location here
   //if the num is 5 ducky location changes to 5
@@ -33,12 +33,12 @@ function Game() {
 
   //this is if it is just down
   //requirements: preview location array state.
+  /*  returns 2d array of locations*/
   async function previewDown() {
     //using createBridge down from the logic.js file
     const previewCoordinates = await previewDownLocations(die, duckyLocation);
     setPreviewLocations(previewCoordinates);
-    console.log(previewLocations);
-    // setDuckyLocation(previewDown(die, grid, duckyLocation).coordinates);
+    console.log(previewLocations); //  ex : [[2, 1], [0,4]]
   }
 
   //moves duck down and is set to the number of spots rolled by the die
@@ -64,11 +64,6 @@ function Game() {
   //   setGrid(newGrid);
   //   console.log();
   // };
-
-  function showDuckyLocation() {
-    console.log(duckyLocation);
-    console.log("grid", grid);
-  }
 
   // //preview what it would be like if the duck moved right as set per the die
   // const moveDuckRightPreview = () => {
@@ -97,8 +92,25 @@ function Game() {
     console.log(previewLocations);
   }
 
+  function removePreview() {
+    setPreviewLocations([[]]);
+  }
+
+  function commitRoll(event) {
+    event.preventDefault();
+    const newGrid = [...grid];
+    for (let location of previewLocations) {
+      newGrid[location[0]][location[1]] = 1;
+    }
+    setDuckyLocation(previewLocations[previewLocations.length - 1]);
+    setPreviewLocations([[]]);
+    setGrid(newGrid);
+  }
+
   //function for getting input from form
+  //only if everything is validated, we can
   function pullForm(event) {
+    //event.target.value == "column?"
     event.preventDefault();
     //information for flexDiretion
     const data = event.target.flexDirection.value;
@@ -124,7 +136,7 @@ function Game() {
           previewLocations={previewLocations}
         />
       </div>
-      <form className="form" onSubmit={pullForm}>
+      <form className="form" onSubmit={commitRoll}>
         <p className="inputformTop ">display:flex;</p>
         <input
           className="inputform inputText"
@@ -147,13 +159,14 @@ function Game() {
 
       <br />
       <br />
-      <button onClick={previewDown}>Button Down</button>
+      <button onClick={previewDown}>Preview Down</button>
       {/* <button onClick={moveDuckRightPreview}>right preview</button>
       <button onClick={moveDuckRight}>Button Right</button>
       <button onClick={moveDuckLeft}>Button Left</button>
       <button onClick={moveDuckUp}>Button Up</button>
       <button onClick={showDuckyLocation}>reveal Location</button>
-      <button onClick={removePreview}>remove preview</button> */}
+    */}
+      <button onClick={removePreview}>remove preview</button>
     </>
   );
 }
