@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import {
-  previewDown,
+  column,
   previewRight,
   previewLeft,
   previewUp,
   createGrid,
+  rowReverse
 } from "../logic";
 import GameBoard from "./GameBoard";
 
@@ -12,13 +13,21 @@ import GameBoard from "./GameBoard";
 function Game() {
   //initializing grid 5x5
   const initialGrid = createGrid(5, 5);
+
+  let initialFormData = {
+    "flex-direction": "",
+    "justify-content": "",
+    "align-items": "",
+  };
   //but keeping concerns separated for now
+  const [formData, setFormData] = useState(initialFormData);
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
   const [previewLocations, setPreviewLocations] = useState([[]]);
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
   const [duckyLocation, setDuckyLocation] = useState(start);
   const [die, setDie] = useState(3);
+  const [validatedFunctions, setValidatedFunctions] = useState([]);
   const [turnsTaken, setTurnsTaken] = useState(0);
   const [formData, setFormData] = useState("");
   const [errorForm, setErrorForm] = useState(false);
@@ -28,8 +37,31 @@ function Game() {
 
   function updateBoard() {}
 
+<<<<<<< HEAD
   const flexProps = {
     "flex-direction": ["row", "row-reverse", "column", "column-reverse"],
+=======
+  function handleChange(evt) {
+    const { name, value } = evt.target;
+    setFormData((fData) => ({
+      ...fData,
+      [name]: value,
+    }));
+    //code to validate,
+    //if validated,
+    //setValidatedFunctions([...blah])
+  }
+
+  //if(flex-direction){
+    let fn = flexProps.flex-direction.flexdirectionoptions 
+    if fn !== undefined
+    fn(coordinates,)
+  }
+
+  
+  const flexProps = {
+    "flex-direction": {"row": previewRight, "row-reverse": rowReverse, "column", "column-reverse"},
+>>>>>>> dd5d4d9d46ba59d4423df54ae5c26ff19a332136
     "align-content": [
       "center",
       "flex-start",
@@ -48,7 +80,10 @@ function Game() {
     ],
     "align-items": ["end", "start", "center", "stretch", "baseline"],
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> dd5d4d9d46ba59d4423df54ae5c26ff19a332136
   /*preview: manipulate coordinates based on css and show them on a z-index: 2
     with the preview having transluscent property, upon submit, we'll change the
     grid accordingly. 
@@ -61,7 +96,7 @@ function Game() {
   /*  returns 2d array of */
   function previewLocationsDown() {
     //using preview down from the logic.js file
-    const previewCoordinates = previewDown(die, duckyLocation);
+    const previewCoordinates = column(die, duckyLocation);
     setPreviewLocations(previewCoordinates);
   }
 
@@ -95,6 +130,7 @@ function Game() {
     }
     setDuckyLocation(previewLocations[previewLocations.length - 1]);
     setPreviewLocations([[]]);
+    setFormData(initialFormData);
     setGrid(newGrid);
   }
 
@@ -197,6 +233,10 @@ function Game() {
         }
       }
     }
+<<<<<<< HEAD
+=======
+    //else return alert you need flex direction
+>>>>>>> dd5d4d9d46ba59d4423df54ae5c26ff19a332136
   }
 
   return (
@@ -208,6 +248,7 @@ function Game() {
           grid={grid}
           duckyLocation={duckyLocation}
           previewLocations={previewLocations}
+          finishCoordinates={finishCoordinates}
         />
         <div>
           <form className="form" onSubmit={commitRoll}>
@@ -263,6 +304,45 @@ function Game() {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+      <form className="form" onSubmit={verifyForm}>
+        <p className="inputformTop ">display:flex;</p>
+        <input
+          className="inputform inputText"
+          name="flex-direction"
+          placeholder="flex-direction:"
+          onChange={handleChange}
+          value={formData["flex-direction"]}
+        ></input>
+        <input
+          className="inputform inputText"
+          name="justify-content"
+          placeholder="justify-content:"
+          onChange={handleChange}
+          value={formData["justify-content"]}
+        ></input>
+        <input
+          className="inputformBot inputText"
+          name="align-items"
+          placeholder="align-items:"
+          onChange={handleChange}
+          value={formData["align-items"]}
+        ></input>
+
+        <button type="submit">Next</button>
+      </form>
+
+      <br />
+      <br />
+      <button onClick={column}>Button Down</button>
+      <button onClick={previewLocationsDown}>Preview Down</button>
+      <button onClick={previewLocationsRight}>Preview Right</button>
+      <button onClick={previewLocationsLeft}>Preview Left</button>
+      <button onClick={previewLocationsUp}>Preview Up</button>
+
+      <button onClick={removePreview}>remove preview</button>
+>>>>>>> dd5d4d9d46ba59d4423df54ae5c26ff19a332136
     </>
   );
 }

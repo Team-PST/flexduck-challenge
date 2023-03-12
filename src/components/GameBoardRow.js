@@ -1,7 +1,13 @@
 import React from "react";
 import GameBoardCell from "./GameBoardCell";
 
-function GameBoardRow({ row, y, duckyLocation, previewLocations }) {
+function GameBoardRow({
+  row,
+  y,
+  duckyLocation,
+  previewLocations,
+  finishCoordinates,
+}) {
   //
   return row.map((cell, index) => (
     <GameBoardCell
@@ -12,6 +18,7 @@ function GameBoardRow({ row, y, duckyLocation, previewLocations }) {
       x={index}
       duckyLocation={duckyLocation}
       previewLocations={previewLocations}
+      finishCoordinates={finishCoordinates}
     />
   ));
 }
