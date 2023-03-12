@@ -20,7 +20,30 @@ function Game() {
   const [duckyLocation, setDuckyLocation] = useState(start);
   const [die, setDie] = useState(3);
   const [turnsTaken, setTurnsTaken] = useState(0);
+  const [formData, setFormData] = useState("");
+
   function updateBoard() {}
+
+  const flexProps = {
+    "flex-direction": ["row", "row-reverse", "column", "column-reverse"],
+    "align-content": [
+      "center",
+      "flex-start",
+      "flex-end",
+      "space-between",
+      "space-around",
+      "space-evenly",
+    ],
+    "justify-content": [
+      "center",
+      "flex-start",
+      "flex-end",
+      "space-between",
+      "space-around",
+      "space-evenly",
+    ],
+    "align-items": ["end", "start", "center", "stretch", "baseline"],
+  };
 
   /*preview: manipulate coordinates based on css and show them on a z-index: 2
     with the preview having transluscent property, upon submit, we'll change the
@@ -89,15 +112,60 @@ function Game() {
     console.log(data);
   }
 
+  function handleChange(evt) {
+    let name = evt.target.name;
+    let val = evt.target.value;
+    verfiyDirection(name, val, evt);
+    setFormData((fData) => ({
+      ...fData,
+      [name]: val,
+    }));
+  }
+
   //function to verfiyDirection
-  function verfiyDirection(event) {
+  function verfiyDirection(name, val, evt) {
+    //event.target.value == "column?"
+    evt.preventDefault();
+    const flexBoxOption = val.split(":")[0];
+    const flexBoxDirection = val.split(":")[1];
+    //console.log(name);
+    //checking to so if the name equals the the flex-direction
+    if (name === "flex-direction") {
+      //if box option is equal to
+      if (flexBoxOption === "flex-direction") {
+        //loop through the flexbox options and then do
+        for (let i = 0; i < flexProps["flex-direction"].length; i++) {
+          console.log(flexProps["flex-direction"][i]);
+        }
+      }
+
+      if (name.split(":")[1] === "row") {
+        //duck can only move left or right
+        //use a state?
+        console.log("it works");
+      } else if (name.split(":")[1] === "column") {
+        //duck moves down
+        //use a state
+      } else {
+        //Next button cannot be pressed
+      }
+    } else {
+      //else for console log nothing entered
+      //next button cannot be pressed
+    }
+    //else return alert you need flex direction
+    //console.log(name);
+  }
+
+  //function to justifyContent
+  function verifyContent(event) {
     //event.target.value == "column?"
     event.preventDefault();
     //information for flexDiretion
-    const data = event.target.flexDirection.value;
+    const data = event.target.flexJustify.value;
     //if there is flex-direction then look at the other value after the :
-    if (data.split(":")[0] === "flex-direction") {
-      if (data.split(":")[1] === "row") {
+    if (data.split(":")[0] === "justify-content") {
+      if (data.split(":")[1] === "flex-start") {
         //duck can only move left or right
         //use a state?
       } else if (data.split(":")[1] === "column") {
@@ -107,11 +175,18 @@ function Game() {
         //Next button cannot be pressed
       }
     } else {
-      //else
+      //else for console log nothing entered
+      //next button cannot be pressed
     }
     //else return alert you need flex direction
     console.log(data);
   }
+  // "center",
+  //     "flex-start",
+  //     "flex-end",
+  //     "space-between",
+  //     "space-around",
+  //     "space-evenly",
 
   return (
     <>
@@ -124,23 +199,28 @@ function Game() {
           previewLocations={previewLocations}
         />
       </div>
-      <form className="form">
+      <form className="form" onSubmit={verifyForm}>
         <p className="inputformTop ">display:flex;</p>
         <input
           className="inputform inputText"
-          name="flexDirection"
+          name="flex-direction"
           placeholder="flex-direction:"
-          onChange={verfiyDirection}
+          onChange={handleChange}
+          value={formData["flex-direction"]}
         ></input>
         <input
           className="inputform inputText"
           name="flexJustify"
           placeholder="justify-content:"
+          onChange={handleChange}
+          value={formData["justify-content"]}
         ></input>
         <input
           className="inputformBot inputText"
           name="flexAlign"
           placeholder="align-items:"
+          onChange={handleChange}
+          value={formData["align-items"]}
         ></input>
 
         <button type="submit">Next</button>
