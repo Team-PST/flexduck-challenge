@@ -83,6 +83,8 @@ function previewRight(num, coordinates) {
   return preview;
 }
 
-function flip(num) {}
+function reverseLeftRight() {}
+
+function reverseUpDow() {}
 
 export { previewDown, previewLeft, previewUp, previewRight, createGrid };

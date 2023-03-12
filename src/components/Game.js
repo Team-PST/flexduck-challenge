@@ -16,7 +16,7 @@ function Game() {
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
   const [duckyLocation, setDuckyLocation] = useState(start);
-  const [die, setDie] = useState(5);
+  const [die, setDie] = useState(3);
   const [turnsTaken, setTurnsTaken] = useState(0);
   function updateBoard() {}
 

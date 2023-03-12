@@ -4,7 +4,7 @@ import "../style/GameBoard.css";
 function GameBoardCell({ value, y, x, duckyLocation, previewLocations }) {
   for (let i = 0; i < previewLocations.length; i++) {
     if (JSON.stringify([y, x]) === JSON.stringify(previewLocations[i])) {
-      return <div className="preview">{i + 1}</div>;
+      return <div className="preview"></div>;
     }
   }
   //check the duckyLocation for x and y of the cell and if the ducky Location is equal to the x, y props the for that
