@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/GameBoard.css";
+import "../style/GameBoard.scss";
 
 function GameBoardCell({ value, y, x, duckyLocation, previewLocations }) {
   for (let i = 0; i < previewLocations.length; i++) {

@@ -100,20 +100,14 @@ function Game() {
 
   //function for getting input from form
   //only if everything is validated, we can
+  //make the 'next' button pressable
+  //send the info to the logic
   function verifyForm(event) {
     //event.target.value == "column?"
     event.preventDefault();
-    //information for flexDiretion
-    const data = event.target.flexDirection.value;
-    //if there is flex-direction then look at the other value after the :
-    if (data.split(":")[0] === "flex-direction") {
-      if (data.split(":")[1] === "row") {
-        //duck can only move left or right
-      }
-    } else {
+    if (direction && justify && align) {
+      console.log("send info to logic 🚀");
     }
-    //else return alert you need flex direction
-    console.log(data);
   }
 
   function handleChange(evt) {
@@ -159,9 +153,10 @@ function Game() {
     evt.preventDefault();
     const justifyOption = val.split(":")[0];
     const justifyDirection = val.split(":")[1];
-    //console.log(name);
+    console.log(name);
     //checking to so if the name equals the the flex-direction
     if (name === "justify-content") {
+      console.log("yes");
       //if box option is equal to
       if (justifyOption === "justify-content") {
         //loop through the flexbox options and then do
@@ -193,6 +188,7 @@ function Game() {
         const found = flexProps["align-items"].find(
           (element) => alignDirection === element
         );
+        console.log(found);
         if (found === undefined) {
           setErrorForm(true);
           //once the setErrorForm is true the warning comes up
@@ -215,24 +211,24 @@ function Game() {
         />
       </div>
       <form className="form" onSubmit={verifyForm}>
-        <p className="inputformTop ">display:flex;</p>
+        <p className="form--top">display:flex;</p>
         <input
-          className="inputform inputText"
+          className="form--input form--text"
           name="flex-direction"
           placeholder="flex-direction:"
           onChange={handleChange}
           value={formData["flex-direction"]}
         ></input>
         <input
-          className="inputform inputText"
-          name="flexJustify"
+          className="form--input form--text"
+          name="justify-content"
           placeholder="justify-content:"
           onChange={handleChange}
           value={formData["justify-content"]}
         ></input>
         <input
-          className="inputformBot inputText"
-          name="flexAlign"
+          className="form--bottom form--text"
+          name="align-items"
           placeholder="align-items:"
           onChange={handleChange}
           value={formData["align-items"]}

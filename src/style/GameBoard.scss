@@ -1,19 +1,32 @@
-.grid {
-    /* display: flex; */
-
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1320px;
+  margin: 1rem auto;
+  &__img {
+   
+    background-image: url('../assets/images/rubbeducky2.png');
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+  }
+  &__titleBanner {
+    display: flex;
+  }
+  &__p{
+    width: 80%;
+  }
 }
-
 .gameboard{
     width: auto;
     height: auto;
     margin: 0 auto;
-}
-
-.gameboard-div{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    
+    &--div{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
 }
 
 .gameboardcell {
@@ -22,15 +35,18 @@
     background:blue;
     border: 1px solid black;
 }
+
+.gameboardrow{
+  background:purple;
+}
+
 .outer-bounds {
     width:50px;
     height:50px;
     background:rgb(255, 255, 255);
     border: 1px solid black;
 }
-.gameboardrow{
-    background:purple;
-}
+
 
 .ducky {
     background: yellow;
@@ -58,31 +74,26 @@
    flex-direction:column;
    justify-content:center;
    align-items:center;
-     
+     &--top {
+      margin:0;
+      border-top:1px solid black;
+      width: 304px;
+      font-size: 1rem;
+      border-right:1px solid black;
+      border-left:1px solid black;
+     }
+     &--bottom {
+      margin:0;
+      border-bottom:1px solid black;
+     }
+     &--text {
+      font-size: 1rem;
+      border-right:1px solid black;
+      border-left:1px solid black;
+      width: 300px;
+     }
 }
 
-.inputformTop {
-    margin:0;
-    border-top:1px solid black;
-    width: 304px;
-    font-size: 1rem;
-    border-right:1px solid black;
-    border-left:1px solid black;
-
-}
-
-.inputformBot {
-    margin:0;
-    border-bottom:1px solid black;
-}
-
-.inputText {
-    font-size: 1rem;
-    border-right:1px solid black;
-    border-left:1px solid black;
-    width: 300px;
-
-}
 
 input {
     border-top-style: hidden;
@@ -101,6 +112,10 @@ input {
     display:flex;
     justify-content:space-between;
     align-items: center;
+    &--sec {
+      dipslay:flex;
+      flex-direction:column;
+    }
   }
 
   .gameboard-grid{
@@ -109,12 +124,32 @@ input {
   }
 
   .rules {
-    width: 70%;
-  }
+    width: 80%;
+    display: flex;
+    &__div{
+      width:50%;      
+    }
+    &__wrapper{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+    }
+    &__divEx{
+      width: 150px;
+      height: 150px;
+      color:white;
+      background: black;
+    }
+    &__title {
 
-  .main-sec{
-    dipslay:flex;
-    flex-direction:column;
+    }
+    &__list {
+      
+    }
+    &__item {
+      
+    }
   }
 
   .toUse{
