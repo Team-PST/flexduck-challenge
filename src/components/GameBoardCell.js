@@ -1,15 +1,7 @@
 import React from "react";
 import "../style/GameBoard.scss";
 
-function GameBoardCell({
-  value,
-  y,
-  x,
-  duckyLocation,
-  previewLocations,
-  finishCoordinates,
-}) {
-  console.log(finishCoordinates);
+function GameBoardCell({ value, y, x, duckyLocation, previewLocations }) {
   for (let i = 0; i < previewLocations.length; i++) {
     if (JSON.stringify([y, x]) === JSON.stringify(previewLocations[i])) {
       return <div className="preview"></div>;
@@ -21,8 +13,6 @@ function GameBoardCell({
     return <div className="ducky"></div>;
     //if the value in the div equals one we change that to the preview class
     //the user want to to see if they may want to move to that position
-  } else if (finishCoordinates[0] === y && finishCoordinates[1] === x) {
-    return <div className="finish"></div>;
   } else if (value === 1) {
     //if the value is equal to 1 and the preview is true we want to show the preview class
 
