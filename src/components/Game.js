@@ -201,7 +201,7 @@ function Game() {
 
   return (
     <>
-      <div>
+      <div className="game">
         <h1>Create the bridge necessary to get the duck to the end!</h1>
         <GameBoard
           className="grid"
@@ -209,43 +209,60 @@ function Game() {
           duckyLocation={duckyLocation}
           previewLocations={previewLocations}
         />
+        <div>
+          <form className="form" onSubmit={verifyForm}>
+            <p className="form--top">display:flex;</p>
+            <input
+              className="form--input form--text"
+              name="flex-direction"
+              placeholder="flex-direction:"
+              onChange={handleChange}
+              value={formData["flex-direction"]}
+            ></input>
+            <input
+              className="form--input form--text"
+              name="justify-content"
+              placeholder="justify-content:"
+              onChange={handleChange}
+              value={formData["justify-content"]}
+            ></input>
+            <input
+              className="form--bottom form--text"
+              name="align-items"
+              placeholder="align-items:"
+              onChange={handleChange}
+              value={formData["align-items"]}
+            ></input>
+
+            <button type="submit">Next</button>
+          </form>
+        </div>
+        <div className="game__buttons">
+          <div className="game__buttons--direction">
+            {/* <button onClick={previewDown}>Button Down</button> */}
+
+            <button className="button__blank"></button>
+            <button className="button__dir" onClick={previewLocationsUp}>
+              Up Preview
+            </button>
+            <button className="button__blank"></button>
+            <button className="button__dir" onClick={previewLocationsLeft}>
+              Left Preview
+            </button>
+            <button className="button__dir" onClick={previewLocationsDown}>
+              Down Preview
+            </button>
+            <button className="button__dir" onClick={previewLocationsRight}>
+              Right Preview
+            </button>
+          </div>
+          <div className="game__buttons--remove">
+            <button className="button__remove" onClick={removePreview}>
+              remove preview
+            </button>
+          </div>
+        </div>
       </div>
-      <form className="form" onSubmit={verifyForm}>
-        <p className="form--top">display:flex;</p>
-        <input
-          className="form--input form--text"
-          name="flex-direction"
-          placeholder="flex-direction:"
-          onChange={handleChange}
-          value={formData["flex-direction"]}
-        ></input>
-        <input
-          className="form--input form--text"
-          name="justify-content"
-          placeholder="justify-content:"
-          onChange={handleChange}
-          value={formData["justify-content"]}
-        ></input>
-        <input
-          className="form--bottom form--text"
-          name="align-items"
-          placeholder="align-items:"
-          onChange={handleChange}
-          value={formData["align-items"]}
-        ></input>
-
-        <button type="submit">Next</button>
-      </form>
-
-      <br />
-      <br />
-      <button onClick={previewDown}>Button Down</button>
-      <button onClick={previewLocationsDown}>Preview Down</button>
-      <button onClick={previewLocationsRight}>Preview Right</button>
-      <button onClick={previewLocationsLeft}>Preview Left</button>
-      <button onClick={previewLocationsUp}>Preview Up</button>
-
-      <button onClick={removePreview}>remove preview</button>
     </>
   );
 }

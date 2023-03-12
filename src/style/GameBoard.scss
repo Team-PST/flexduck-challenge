@@ -5,7 +5,7 @@
   max-width: 1320px;
   margin: 1rem auto;
   &__img {
-   
+    
     background-image: url('../assets/images/rubbeducky2.png');
     background-size: cover;
     height: 100px;
@@ -19,21 +19,21 @@
   }
 }
 .gameboard{
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-    &--div{
-      display:flex;
-      justify-content: center;
-      align-items: center;
-    }
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  &--div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .gameboardcell {
-    width:50px;
-    height:50px;
-    background:blue;
-    border: 1px solid black;
+  width:50px;
+  height:50px;
+  background:blue;
+  border: 1px solid black;
 }
 
 .gameboardrow{
@@ -41,136 +41,193 @@
 }
 
 .outer-bounds {
-    width:50px;
-    height:50px;
-    background:rgb(255, 255, 255);
-    border: 1px solid black;
+  width:50px;
+  height:50px;
+  background:rgb(255, 255, 255);
+  border: 1px solid black;
 }
 
 
 .ducky {
-    background: yellow;
-    width:50px;
-    height:50px;
-    border: 1px solid yellow;
-
+  background: blue;
+  background-image: url('../assets/images/rubbeducky2.png');
+    background-size: cover;
+  width:50px;
+  height:50px;
+   border: 1px solid black;
+  
 }
 .bridge {
-    background: rgb(197, 92, 11);
-    width:50px;
-    height:50px;
-    border: 1px solid rgb(0, 0, 0);
-
+  background: rgb(197, 92, 11);
+  width:50px;
+  height:50px;
+  border: 1px solid rgb(0, 0, 0);
+  
 }
 .preview {
-    background: rgb(0, 252, 210);
-    width:50px;
-    height:50px;
-    border: 1px solid yellow;
-
+  background: rgb(0, 252, 210);
+  width:50px;
+  height:50px;
+  border: 1px solid yellow;
+  
 }
 .form {
-   display:flex;
-   flex-direction:column;
-   justify-content:center;
-   align-items:center;
-     &--top {
-      margin:0;
-      border-top:1px solid black;
-      width: 304px;
-      font-size: 1rem;
-      border-right:1px solid black;
-      border-left:1px solid black;
-     }
-     &--bottom {
-      margin:0;
-      border-bottom:1px solid black;
-     }
-     &--text {
-      font-size: 1rem;
-      border-right:1px solid black;
-      border-left:1px solid black;
-      width: 300px;
-     }
+  margin-top: 1rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  &--top {
+    margin:0;
+    border-top:1px solid black;
+    width: 304px;
+    font-size: 1rem;
+    border-right:1px solid black;
+    border-left:1px solid black;
+  }
+  &--bottom {
+    margin:0;
+    border-bottom:1px solid black;
+  }
+  &--text {
+    font-size: 1rem;
+    border-right:1px solid black;
+    border-left:1px solid black;
+    width: 300px;
+  }
 }
 
 
 input {
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: groove;
-    border: 0px solid;
-
-  }
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  border: 0px solid;
   
-  .no-outline:focus {
-    outline: none;
-  }
+}
 
-  .main {
+.no-outline:focus {
+  outline: none;
+}
+
+.main {
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  &__sec {
     display:flex;
-    justify-content:space-between;
-    align-items: center;
-    &--sec {
-      dipslay:flex;
-      flex-direction:column;
-    }
-  }
-
-  .gameboard-grid{
-    dipslay:flex;
-    flex-direction:column;
-  }
-
-  .rules {
-    width: 80%;
-    display: flex;
-    &__div{
-      width:50%;      
-    }
-    &__wrapper{
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 100%;
-    }
-    &__divEx{
-      width: 150px;
-      height: 150px;
-      color:white;
-      background: black;
-    }
-    &__title {
-
-    }
-    &__list {
-      
-    }
-    &__item {
-      
-    }
-  }
-
-  .toUse{
-    width: 70%;
-  
-  }
-
-  .outside-die {
-    background: tomato;
-    border-radius:10%;
-    width: 104px;  
-    height: 104px; 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding: 4px; 
-  }
- 
-
-  .inside-die {
-    font-size: 2rem;
-    color:white;
+    margin: 0 4rem;
     
   }
+}
+
+.gameboard-grid{
+  display:flex;
+  flex-direction:column;
+}
+
+.rules {
+  width: 80%;
+  display: flex;
+  &__div{
+    width:50%;      
+  }
+  &__wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+  &__divEx{
+    width: 150px;
+    height: 150px;
+    color:white;
+    background: black;
+  }
+  &__title {
+    
+  }
+  &__list {
+    
+  }
+  &__item {
+    
+  }
+}
+
+.toUse{
+  width: 70%;
+  margin-right:2rem;
+  background: rgb(134, 134, 241);
+}
+
+.outside-die {
+  background: tomato;
+  border-radius:10%;
+  width: 104px;  
+  height: 104px; 
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding: 4px; 
+}
+
+
+.inside-die {
+  font-size: 2rem;
+  color:white;
+  
+}
+
+.game {
+  width:70%;
+  &__buttons{
+    width: 60%;
+    margin: 2rem auto 0;
+    &--remove {
+      display: flex;
+      justify-content: center;
+    }
+    &--direction{
+      margin-left: 0.6rem;
+    }
+  }
+
+}
+
+.button{
+  
+  &__dir{
+   
+    background: rgb(2, 2, 85);
+    color:white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    &:hover{
+      background: rgb(134, 134, 241);
+    }
+  }
+    &__blank{
+      background: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    border: none;
+    }
+    &__remove{
+      background: rgb(139, 2, 2);
+      color:white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      width: 100px;
+      height: 50px;
+      &:hover{
+        background: rgb(243, 120, 120);
+      }
+    }
+  }
+  

@@ -1,7 +1,9 @@
 @use './styles/partials/reset' as *;
+@use './styles/partials/variables' as *;
 
 .App {
   text-align: center;
+  font:$font-primary;
 }
 
 .App-logo {
