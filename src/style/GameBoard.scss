@@ -1,3 +1,5 @@
+@use './partials/variables' as *;
+
 .welcome {
   display: flex;
   flex-direction: column;
@@ -29,13 +31,53 @@
   }
 }
 
+//exterior cell
 .gameboardcell {
   width:50px;
   height:50px;
-  background:blue;
+  // background:blue;
   border: 1px solid black;
+  position:relative;
 }
 
+//interior wave
+.wave {
+  position:absolute;
+  width:100%;
+  height:100%;
+  left:0;
+  top:cal(80%);
+  background: url('../assets/images/wave.png');
+  background-size: cover;
+  background-color: $color-light;
+  transition: all 5s;
+  z-index:-1;
+  animation:wave 1s linear infinite;
+
+}
+
+//interior wave
+// .wave:before {
+//   content:"";
+//   position:absolute;
+//   width:100%;
+//   height:10px;
+//   left:0;
+//   top:-10px;
+//   background: url('../assets/images/wave.png');
+//   background-size: cover;
+//     animation:wave 1.5s linear infinite;
+// }
+
+@keyframes wave {
+  0% {
+    background-position-x: 0 ;
+  }
+  100% {
+    background-position-x:35px;
+  }
+  
+}
 .gameboardrow{
   background:purple;
 }
@@ -49,7 +91,7 @@
 
 
 .ducky {
-  background: blue;
+  background: $color-light;
   background-image: url('../assets/images/rubbeducky2.png');
     background-size: cover;
   width:50px;
@@ -159,7 +201,9 @@ input {
 .toUse{
   width: 70%;
   margin-right:2rem;
-  background: rgb(134, 134, 241);
+  background: $color-light;
+  color:white;
+  padding: 2rem;
 }
 
 .outside-die {
@@ -190,7 +234,7 @@ input {
       justify-content: center;
     }
     &--direction{
-      margin-left: 0.6rem;
+      margin-left: 1rem;
     }
   }
 
@@ -200,11 +244,11 @@ input {
   
   &__dir{
    
-    background: rgb(2, 2, 85);
+    background: $color-light;
     color:white;
     padding: 1rem 2rem;
     border-radius: 10px;
-    width: 100px;
+    width: 90px;
     height: 50px;
     &:hover{
       background: rgb(134, 134, 241);
@@ -214,16 +258,16 @@ input {
       background: white;
     padding: 1rem 2rem;
     border-radius: 10px;
-    width: 100px;
+    width: 90px;
     height: 50px;
     border: none;
     }
     &__remove{
-      background: rgb(139, 2, 2);
+      background: tomato;
       color:white;
       padding: 1rem 2rem;
       border-radius: 10px;
-      width: 100px;
+      width: 90px;
       height: 50px;
       &:hover{
         background: rgb(243, 120, 120);

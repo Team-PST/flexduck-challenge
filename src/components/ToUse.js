@@ -11,6 +11,8 @@ function ToUse() {
         </p>
         <ul>
           <li>row</li>
+          <li>row-reverse</li>
+          <li>column-reverse</li>
           <li>column</li>
         </ul>
       </div>
@@ -24,9 +26,12 @@ function ToUse() {
           vertical.
         </p>
         <ul>
+          <li>center</li>
           <li>flex-start</li>
           <li>flex-end</li>
-          <li>center</li>
+          <li>space-between</li>
+          <li>space-around</li>
+          <li>space-evenly</li>
         </ul>
       </div>
 
@@ -40,11 +45,8 @@ function ToUse() {
           would be horizontal.
         </p>
         <ul>
-          <li>align-items: flex-start;</li>
-          <li>align-items: flex-end; </li>
-          <li>center: items are centered along the line</li>
-          <li>align-items: self-start;</li>
-          <li>align-items: self-end;</li>
+          <li>end</li> <li>start</li> <li>center</li> <li>stretch</li>
+          <li>baseline</li>
         </ul>
       </div>
     </div>

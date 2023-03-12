@@ -21,7 +21,11 @@ function GameBoardCell({ value, y, x, duckyLocation, previewLocations }) {
     return <div className="bridge"></div>;
   } else {
     //if the cell is not a ducky cell and not a value of 1 then we want to show a the normal gameboardcell styling
-    return <div className={"gameboardcell"}></div>;
+    return (
+      <div className={"gameboardcell"}>
+        <div className="wave"></div>
+      </div>
+    );
   }
 }
 
