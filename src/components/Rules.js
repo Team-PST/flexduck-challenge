@@ -3,7 +3,7 @@ import React from "react";
 function Rules() {
   return (
     <section className="rules">
-      <div>Rules</div>
+      <h3>Rules</h3>
       <ul>
         <li>To play this game you need to move the ducky to the red square.</li>
         <li>Move the ducky by rolling the die.</li>
@@ -13,3 +13,5 @@ function Rules() {
     </section>
   );
 }
+
+export default Rules;

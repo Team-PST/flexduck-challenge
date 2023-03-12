@@ -1,7 +1,8 @@
 import "./App.css";
 import Game from "./components/Game";
-import Rules from "./components/Rules";
+import Rules from "../src/components/Rules";
 import "./style/GameBoard.css";
+import ToUse from "./components/ToUse";
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
         flex-direction
       </p>
       <div className="main">
-        <Rules />
+        <div className="main-sec">
+          <Rules />
+          <ToUse />
+        </div>
         <Game />
       </div>
     </div>
