@@ -11,7 +11,7 @@ import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
   //initializing grid 5x5
-  const initialGrid = createGrid(25, 25);
+  const initialGrid = createGrid(5, 5);
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
   const [previewLocations, setPreviewLocations] = useState();
