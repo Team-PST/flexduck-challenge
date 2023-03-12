@@ -1,24 +1,15 @@
-import "./App.css";
-import Game from "./components/Game";
-import Rules from "./components/Rules";
-import "./style/GameBoard.css";
+import React from "react";
 
-function App() {
+function Rules() {
   return (
-    <div className="app">
-      <h1>Welcome to Flexduck Challenge!</h1>
-      <p>
-        Flexduck was created to teach new front-end developers of how to utilize
-        the css layout model, flexbox. With this game, we will teach you the
-        flexbox directions through justify content, align items and
-        flex-direction
-      </p>
-      <div className="main">
-        <Rules />
-        <Game />
-      </div>
-    </div>
+    <section className="rules">
+      <div>Rules</div>
+      <ul>
+        <li>To play this game you need to move the ducky to the red square.</li>
+        <li>Move the ducky by rolling the die.</li>
+        <li>The die will tell you how many spaces you can move.</li>
+        <li></li>
+      </ul>
+    </section>
   );
 }
-
-export default App;
