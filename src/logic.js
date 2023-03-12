@@ -1,13 +1,6 @@
 //will be separated into different components
 
 //for testing and development purposes
-const grid = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-];
 
 /**
  * Creates a 2D array with the specified dimensions and initializes
@@ -44,56 +37,52 @@ function checkOutOfBountsLeft() {}
 //grid[y].length
 function checkOutOfBountsRight() {}
 
-function createBridgeUp(num, grid, coordinates) {
+function previewUp(num, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
+  const preview = [];
   const destinationY = y - num;
-  for (let i = y - 1; i >= destinationY; i--) {
-    grid[i][x] = 1;
+  for (let i = y; i > destinationY; i--) {
+    preview.push([i, x]);
   }
-  coordinates = [destinationY, x];
-  return { grid, coordinates };
+  return preview;
 }
 
 //prototype for preview
-function previewDownLocations(num, coordinates) {
+function previewDown(num, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
   const preview = [];
   const destinationY = y + num;
-  for (let i = y + 1; i <= destinationY; i++) {
+  for (let i = y; i < destinationY; i++) {
     preview.push([i, x]);
   }
   return preview; //[[1,0][2, 0]....]
 }
 
-function createBridgeLeft(num, grid, coordinates) {
+function previewLeft(num, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
+  const preview = [];
   const destinationX = x - num;
-  for (let i = x - 1; i > destinationX; i--) {
-    grid[y][i] = 1;
+  for (let i = x; i > destinationX; i--) {
+    preview.push([y, i]);
   }
-  coordinates = [y, destinationX];
-  return { grid, coordinates };
+  return preview;
 }
 
-function createBridgeRight(num, grid, coordinates) {
+function previewRight(num, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
+  const preview = [];
   const destinationX = x + num;
-  for (let i = x; i <= destinationX; i++) {
-    grid[y][i] = 1;
+  for (let i = x; i < destinationX; i++) {
+    preview.push([y, i]);
   }
-  const newGrid = grid;
-  coordinates = [y, destinationX];
-  return { newGrid, coordinates };
+  console.log(preview);
+  return preview;
 }
 
-export {
-  previewDownLocations,
-  createBridgeLeft,
-  createBridgeUp,
-  createBridgeRight,
-  createGrid,
-};
+function flip(num) {}
+
+export { previewDown, previewLeft, previewUp, previewRight, createGrid };

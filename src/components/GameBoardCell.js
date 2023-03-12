@@ -2,16 +2,9 @@ import React from "react";
 import "../style/GameBoard.css";
 
 function GameBoardCell({ value, y, x, duckyLocation, previewLocations }) {
-  for (let subarray of previewLocations) {
-    console.log(subarray);
-    console.log(
-      "y x , and subarray",
-      JSON.stringify([y, x]),
-      JSON.stringify(subarray)
-    );
-
-    if (JSON.stringify([y, x]) === JSON.stringify(subarray)) {
-      return <div className="preview"></div>;
+  for (let i = 0; i < previewLocations.length; i++) {
+    if (JSON.stringify([y, x]) === JSON.stringify(previewLocations[i])) {
+      return <div className="preview">{i + 1}</div>;
     }
   }
   //check the duckyLocation for x and y of the cell and if the ducky Location is equal to the x, y props the for that

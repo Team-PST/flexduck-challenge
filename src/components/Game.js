@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import {
-  previewDownLocations,
-  createBridgeRight,
-  createBridgeLeft,
-  createBridgeUp,
+  previewDown,
+  previewRight,
+  previewLeft,
+  previewUp,
   createGrid,
 } from "../logic";
 import GameBoard from "./GameBoard";
 
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
-  //initializing grid 5x5
   const initialGrid = createGrid(5, 5);
-  //but keeping concerns separated for now
-  const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
+  const [grid, setGrid] = useState(initialGrid);
   const [previewLocations, setPreviewLocations] = useState([[]]);
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
   const [duckyLocation, setDuckyLocation] = useState(start);
-  const [die, setDie] = useState(4);
+  const [die, setDie] = useState(5);
   const [turnsTaken, setTurnsTaken] = useState(0);
   function updateBoard() {}
-  //set location here
-  //if the num is 5 ducky location changes to 5
 
   /*preview: manipulate coordinates based on css and show them on a z-index: 2
     with the preview having transluscent property, upon submit, we'll change the
@@ -33,63 +29,29 @@ function Game() {
 
   //this is if it is just down
   //requirements: preview location array state.
-  /*  returns 2d array of locations*/
-  async function previewDown() {
-    //using createBridge down from the logic.js file
-    const previewCoordinates = await previewDownLocations(die, duckyLocation);
+  /*  returns 2d array of */
+  function previewLocationsDown() {
+    //using preview down from the logic.js file
+    const previewCoordinates = previewDown(die, duckyLocation);
     setPreviewLocations(previewCoordinates);
-    console.log(previewLocations); //  ex : [[2, 1], [0,4]]
   }
 
-  //moves duck down and is set to the number of spots rolled by the die
-  // const moveDuckUp = () => {
-  //   createBridgeUp(die, grid, duckyLocation);
-  //   setDuckyLocation(createBridgeUp(die, grid, duckyLocation).coordinates);
-  // };
+  // moves duck down and is set to the number of spots rolled by the die
+  function previewLocationsUp() {
+    const previewCoordinates = previewUp(die, duckyLocation);
+    setPreviewLocations(previewCoordinates);
+  }
 
-  // //moves duck left and is set to the number of spots rolled by the die
-  // const moveDuckLeft = () => {
-  //   createBridgeLeft(die, grid, duckyLocation);
-  //   setDuckyLocation(createBridgeLeft(die, grid, duckyLocation).coordinates);
-  // };
+  //moves duck left and is set to the number of spots rolled by the die
+  function previewLocationsLeft() {
+    const previewCoordinates = previewLeft(die, duckyLocation);
+    setPreviewLocations(previewCoordinates);
+  }
 
-  // //moves duck right and is set to the number of spots rolled by the die
-  // const moveDuckRight = () => {
-  //   const { newGrid, coordinates } = createBridgeRight(
-  //     die,
-  //     grid,
-  //     duckyLocation
-  //   );
-  //   setDuckyLocation(coordinates);
-  //   setGrid(newGrid);
-  //   console.log();
-  // };
-
-  // //preview what it would be like if the duck moved right as set per the die
-  // const moveDuckRightPreview = () => {
-  //   //need to create a temp grid array
-  //   const tempGrid = [];
-  //   //use a for loop to loop through the rows of the array and push the temp grid to the spread rows
-  //   for (let row of grid) {
-  //     tempGrid.push([...row]);
-  //   }
-
-  //   //set the placement of the ducky and the cordinates on the temp
-  //   const { newGrid, coordinates } = createBridgeRight(
-  //     die,
-  //     tempGrid,
-  //     duckyLocation
-  //   );
-
-  //   setPreviewGrid(newGrid);
-  //   setPreviewGridBool(true);
-  // };
-
-  //
-  function showDuckyLocation() {
-    console.log(duckyLocation);
-    console.log("grid", grid);
-    console.log(previewLocations);
+  //moves duck right and is set to the number of spots rolled by the die
+  function previewLocationsRight() {
+    const previewCoordinates = previewRight(die, duckyLocation);
+    setPreviewLocations(previewCoordinates);
   }
 
   function removePreview() {
@@ -109,7 +71,7 @@ function Game() {
 
   //function for getting input from form
   //only if everything is validated, we can
-  function pullForm(event) {
+  function verifyForm(event) {
     //event.target.value == "column?"
     event.preventDefault();
     //information for flexDiretion
@@ -159,13 +121,11 @@ function Game() {
 
       <br />
       <br />
-      <button onClick={previewDown}>Preview Down</button>
-      {/* <button onClick={moveDuckRightPreview}>right preview</button>
-      <button onClick={moveDuckRight}>Button Right</button>
-      <button onClick={moveDuckLeft}>Button Left</button>
-      <button onClick={moveDuckUp}>Button Up</button>
-      <button onClick={showDuckyLocation}>reveal Location</button>
-    */}
+      <button onClick={previewLocationsDown}>Preview Down</button>
+      <button onClick={previewLocationsRight}>Preview Right</button>
+      <button onClick={previewLocationsLeft}>Preview Left</button>
+      <button onClick={previewLocationsUp}>Preview Up</button>
+
       <button onClick={removePreview}>remove preview</button>
     </>
   );
