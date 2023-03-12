@@ -100,12 +100,13 @@ function Game() {
           previewLocations={previewLocations}
         />
       </div>
-      <form className="form" onSubmit={verifyForm}>
+      <form className="form">
         <p className="inputformTop ">display:flex;</p>
         <input
           className="inputform inputText"
           name="flexDirection"
           placeholder="flex-direction:"
+          onChange={verifyForm}
         ></input>
         <input
           className="inputform inputText"
