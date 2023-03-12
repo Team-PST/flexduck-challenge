@@ -4,6 +4,16 @@ function ToUse() {
   return (
     <div className="toUse">
       <h3>What to use</h3>
+      <div className="direction">
+        <p>
+          For <span>flex-direction</span> you will use this property to aim your
+          ducky in the right direction! You can use the 2 directions.
+        </p>
+        <ul>
+          <li>row</li>
+          <li>column</li>
+        </ul>
+      </div>
       <div className="justify">
         <p>
           For <span>justify-content</span> you use this property to align the
@@ -14,9 +24,9 @@ function ToUse() {
           vertical.
         </p>
         <ul>
-          <li>flex-start (default): items are packed toward the start line</li>
-          <li>flex-end: items are packed toward to end line</li>
-          <li>center: items are centered along the line</li>
+          <li>flex-start</li>
+          <li>flex-end</li>
+          <li>center</li>
         </ul>
       </div>
 
