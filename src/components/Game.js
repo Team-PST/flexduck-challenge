@@ -21,6 +21,8 @@ function Game() {
   const [die, setDie] = useState(3);
   const [turnsTaken, setTurnsTaken] = useState(0);
   const [formData, setFormData] = useState("");
+  const [errorForm, setErrorForm] = useState(false);
+  const [direction, setDirection] = useState("");
 
   function updateBoard() {}
 
@@ -116,6 +118,8 @@ function Game() {
     let name = evt.target.name;
     let val = evt.target.value;
     verfiyDirection(name, val, evt);
+    verifyContent(name, val, evt);
+
     setFormData((fData) => ({
       ...fData,
       [name]: val,
@@ -134,27 +138,42 @@ function Game() {
       //if box option is equal to
       if (flexBoxOption === "flex-direction") {
         //loop through the flexbox options and then do
-        for (let i = 0; i < flexProps["flex-direction"].length; i++) {
-          console.log(flexProps["flex-direction"][i]);
+        const found = flexProps["flex-direction"].find(
+          (element) => flexBoxDirection === element
+        );
+        if (found === undefined) {
+          setErrorForm(true);
+          //once the setErrorForm is true the warning comes up
+        } else {
+          setDirection(found);
         }
       }
-
-      if (name.split(":")[1] === "row") {
-        //duck can only move left or right
-        //use a state?
-        console.log("it works");
-      } else if (name.split(":")[1] === "column") {
-        //duck moves down
-        //use a state
-      } else {
-        //Next button cannot be pressed
-      }
-    } else {
-      //else for console log nothing entered
-      //next button cannot be pressed
     }
-    //else return alert you need flex direction
+  }
+
+  //function to verfiyDirection
+  function verifyContent(name, val, evt) {
+    //event.target.value == "column?"
+    evt.preventDefault();
+    const flexBoxOption = val.split(":")[0];
+    const flexBoxDirection = val.split(":")[1];
     //console.log(name);
+    //checking to so if the name equals the the flex-direction
+    if (name === "flex-direction") {
+      //if box option is equal to
+      if (flexBoxOption === "flex-direction") {
+        //loop through the flexbox options and then do
+        const found = flexProps["flex-direction"].find(
+          (element) => flexBoxDirection === element
+        );
+        if (found === undefined) {
+          setErrorForm(true);
+          //once the setErrorForm is true the warning comes up
+        } else {
+          setDirection(found);
+        }
+      }
+    }
   }
 
   //function to justifyContent
