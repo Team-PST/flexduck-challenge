@@ -71,6 +71,17 @@ function previewLeft(num, coordinates) {
   return preview;
 }
 
+//prototype for preview
+function previewDown(num, coordinates) {
+  const y = coordinates[0];
+  const x = coordinates[1];
+  const preview = [];
+  const destinationY = y + num;
+  for (let i = y; i < destinationY; i++) {
+    preview.push([i, x]);
+  }
+  return preview; //[[1,0][2, 0]....]
+}
 function previewRight(num, coordinates) {
   const y = coordinates[0];
   const x = coordinates[1];
@@ -137,4 +148,11 @@ function pushLeft(arrs, boardEdge) {
   return arrs;
 }
 
-export { column, previewLeft, previewUp, previewRight, createGrid };
+export {
+  column,
+  previewLeft,
+  previewUp,
+  previewRight,
+  createGrid,
+  previewDown,
+};
