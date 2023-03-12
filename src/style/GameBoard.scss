@@ -48,11 +48,11 @@
   left:0;
   top:cal(80%);
   background: url('../assets/images/wave.png');
-  background-size: cover;
+  background-size: contain;
   background-color: $color-light;
   transition: all 5s;
   z-index:-1;
-  animation:wave 1s linear infinite;
+  animation:wave 1.5s linear infinite;
 
 }
 
@@ -100,10 +100,16 @@
   
 }
 .bridge {
-  background: rgb(197, 92, 11);
+  background: $color-dark;
+  background-image: url('../assets/images/wave.png');
+  background-size: cover;
   width:50px;
   height:50px;
   border: 1px solid rgb(0, 0, 0);
+  background-size: contain;
+  z-index:-1;
+  animation:wave 1.5s linear infinite;
+  transition: all 5s;
   
 }
 .preview {
@@ -275,13 +281,7 @@ input {
     }
   }
 
-  .bridge {
-    background: rgb(197, 92, 11);
-    width:50px;
-    height:50px;
-    border: 1px solid rgb(0, 0, 0);
 
-}
 .preview {
     background: rgb(0, 252, 210);
     width:50px;
