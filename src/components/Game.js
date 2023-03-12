@@ -6,6 +6,7 @@ import {
   createBridgeUp,
   createGrid,
 } from "../logic";
+import Die from "./Die";
 import GameBoard from "./GameBoard";
 
 //maybe props are in app for difficulty? lets discuss on this
@@ -117,6 +118,7 @@ function Game() {
     <>
       <div className="gameboard-grid">
         <div>
+          <Die />
           <h1>Game Goes Here!</h1>
           <GameBoard
             className="grid"

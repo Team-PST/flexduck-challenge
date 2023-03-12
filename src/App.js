@@ -19,6 +19,7 @@ function App() {
           <Rules />
           <ToUse />
         </div>
+
         <Game />
       </div>
     </div>

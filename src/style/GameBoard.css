@@ -124,3 +124,21 @@ input {
     width: 70%;
   
   }
+
+  .outside-die {
+    background: tomato;
+    border-radius:10%;
+    width: 104px;  
+    height: 104px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 4px; 
+  }
+ 
+
+  .inside-die {
+    font-size: 2rem;
+    color:white;
+    
+  }
