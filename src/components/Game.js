@@ -11,10 +11,10 @@ import GameBoard from "./GameBoard";
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
   //initializing grid 5x5
-  const initialGrid = createGrid(25, 25);
+  const initialGrid = createGrid(5, 5);
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
-  const [previewLocations, setPreviewLocations] = useState();
+  const [previewLocations, setPreviewLocations] = useState([[]]);
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
   const [duckyLocation, setDuckyLocation] = useState(start);
@@ -92,7 +92,7 @@ function Game() {
   return (
     <>
       <div>
-        <h1>Game Goes Here!</h1>
+        <h1>Create the bridge necessary to get the duck to the end!</h1>
         <GameBoard
           className="grid"
           grid={grid}
@@ -124,12 +124,12 @@ function Game() {
       <br />
       <br />
       <button onClick={previewDown}>Button Down</button>
-      {/* <button onClick={moveDuckRightPreview}>right preview</button>
-      <button onClick={moveDuckRight}>Button Right</button>
-      <button onClick={moveDuckLeft}>Button Left</button>
-      <button onClick={moveDuckUp}>Button Up</button>
-      <button onClick={showDuckyLocation}>reveal Location</button>
-      <button onClick={removePreview}>remove preview</button> */}
+      <button onClick={previewLocationsDown}>Preview Down</button>
+      <button onClick={previewLocationsRight}>Preview Right</button>
+      <button onClick={previewLocationsLeft}>Preview Left</button>
+      <button onClick={previewLocationsUp}>Preview Up</button>
+
+      <button onClick={removePreview}>remove preview</button>
     </>
   );
 }
