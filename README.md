@@ -5,7 +5,7 @@
  flex-direction
 
 ## 🚀 Demo
-![Home page](./assets/images/pic02.png "Homepage")
+![Home page](./src/assets/images/pic02.png "Homepage")
 ## 📸 Images
 
 ## 💻 Built with
