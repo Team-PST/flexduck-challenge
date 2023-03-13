@@ -5,9 +5,9 @@
  flex-direction
 
 ## 🚀 Demo
-![Home page](./src/assets/images/pic02.png "Homepage")
-## 📸 Images
 
+## 📸 Images
+![Home page](./src/assets/images/pic02.png "Homepage")
 ## 💻 Built with
 <li>React</li>
 <li>CSS</li>
