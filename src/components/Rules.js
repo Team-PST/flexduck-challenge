@@ -26,9 +26,15 @@ function Rules() {
       </div>
       <div className="rules__div">
         <div className="rules__wrapper">
-          <div className="rules__divEx">screen shot of example</div>
-          <div className="rules__divEx">screen shot of example</div>
-          <div className="rules__divEx">screen shot of example</div>
+          <div className="rules__divEx">
+            <img src="../assets/images/pic02.png" alt="image failed to load" />
+          </div>
+          <div className="rules__divEx">
+            <img src="../assets/images/pic03.png" alt="image failed to load" />
+          </div>
+          <div className="rules__divEx">
+            <img src="../assets/images/pic04.png" alt="image failed to load" />
+          </div>
         </div>
       </div>
     </section>
