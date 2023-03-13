@@ -205,4 +205,5 @@ export {
   previewRight,
   createGrid,
   previewDown,
+  options,
 };

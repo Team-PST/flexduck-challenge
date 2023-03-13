@@ -138,6 +138,9 @@ function Game() {
         const found = flexProps["flex-direction"].find(
           (element) => flexBoxDirection === element
         );
+        console.log(flexProps["flex-direction"]);
+        console.log(flexBoxDirection);
+        console.log(found);
         if (found === undefined) {
           setErrorForm(true);
           //once the setErrorForm is true the warning comes up
@@ -157,13 +160,13 @@ function Game() {
     console.log(name);
     //checking to so if the name equals the the flex-direction
     if (name === "justify-content") {
-      console.log("yes");
       //if box option is equal to
       if (justifyOption === "justify-content") {
         //loop through the flexbox options and then do
         const found = flexProps["justify-content"].find(
           (element) => justifyDirection === element
         );
+
         if (found === undefined) {
           setErrorForm(true);
           //once the setErrorForm is true the warning comes up
@@ -234,8 +237,16 @@ function Game() {
               onChange={handleChange}
               value={formData["align-items"]}
             ></input>
-
-            <button type="submit">Next</button>
+            {console.log(errorForm)}
+            {!errorForm ? (
+              <button className="disabled" type="submit">
+                Next
+              </button>
+            ) : (
+              <button className="submit" type="submit">
+                Next
+              </button>
+            )}
           </form>
         </div>
         <div className="game__buttons">

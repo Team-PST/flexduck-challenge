@@ -290,3 +290,25 @@ input {
 
 }
   
+.disabled {
+  pointer-events: none;
+  background: $color-light-sec;
+  color:white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  width: 90px;
+  height: 50px;
+
+}
+
+.submit {
+  background: $color-light;
+  color:white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  width: 90px;
+  height: 50px;
+  &:hover{
+    background: rgb(134, 134, 241);
+  }
+}
