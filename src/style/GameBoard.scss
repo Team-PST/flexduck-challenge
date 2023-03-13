@@ -1,11 +1,16 @@
 @use './partials/variables' as *;
+@use './partials/mixins' as *;
 
 .welcome {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1320px;
-  margin: 1rem auto;
+  @include desktop {
+    max-width: 1320px;
+    margin: 1rem auto;
+
+  }
+  font-family: $font-primary;
   &__img {
     
     background-image: url('../assets/images/rubbeducky2.png');
@@ -15,9 +20,12 @@
   }
   &__titleBanner {
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &__p{
     width: 80%;
+    text-align: center;
   }
 }
 .gameboard{
@@ -53,9 +61,13 @@
   transition: all 5s;
   z-index:-1;
   animation:wave 1.5s linear infinite;
+  
 
 }
-
+.num{
+  z-index: 2;
+  color:black;
+}
 //interior wave
 // .wave:before {
 //   content:"";
@@ -93,7 +105,7 @@
 .ducky {
   background: $color-light;
   background-image: url('../assets/images/rubbeducky2.png');
-    background-size: cover;
+  background-size: cover;
   width:50px;
   height:50px;
    border: 1px solid black;
@@ -113,11 +125,16 @@
   
 }
 .preview {
-  background: rgb(0, 252, 210);
+  background: $color-light-transparent;
+  background-image: url('../assets/images/wave.png');
+  background-size: cover;
   width:50px;
   height:50px;
+  background-size: contain;
+  z-index:-1;
+  animation:wave 1.5s linear infinite;
+  // transition: all 5s;
   border: 1px solid yellow;
-  
 }
 .form {
   margin-top: 1rem;
@@ -128,10 +145,12 @@
   &--top {
     margin:0;
     border-top:1px solid black;
-    width: 304px;
+    width: 300px;
     font-size: 1rem;
     border-right:1px solid black;
     border-left:1px solid black;
+    padding: .5rem;
+    font-family:Arial, sans-serif;
   }
   &--bottom {
     margin:0;
@@ -142,6 +161,7 @@
     border-right:1px solid black;
     border-left:1px solid black;
     width: 300px;
+    padding: .5rem;
   }
 }
 
@@ -165,8 +185,13 @@ input {
   align-items: center;
   &__sec {
     display:flex;
-    margin: 0 4rem;
-    
+    flex-direction: column;
+     
+    // margin: 1rem auto;
+    @include desktop {
+      flex-direction:row;
+      // margin: 0 4rem;
+    }
   }
 }
 
@@ -178,8 +203,15 @@ input {
 .rules {
   width: 80%;
   display: flex;
+  flex-direction: column;
+  @include desktop {
+    flex-direction: row;
+  }
   &__div{
-    width:50%;      
+    width:100%;
+    @include desktop {
+      width:50%;
+    }      
   }
   &__wrapper{
     display: flex;
@@ -205,11 +237,33 @@ input {
 }
 
 .toUse{
-  width: 70%;
-  margin-right:2rem;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 2rem;
   background: $color-light;
   color:white;
-  padding: 2rem;
+  flex-wrap: wrap;
+  line-height: 2rem;
+  &__justify{
+    width:90%;
+  }
+  &__direction {
+    width:90%;
+  }
+  &__align {
+    width:90%;
+  }
+  &__highlight{
+    background: $color-light-sec;
+    padding: .25rem;
+    color:$color-accent-sec;
+  }
+  @include desktop {
+    width: 70%;
+    margin-right:2rem;
+    padding: 2rem;
+  }
+  
 }
 
 .outside-die {
@@ -231,7 +285,11 @@ input {
 }
 
 .game {
-  width:70%;
+  width:100%;
+  &__title{
+    margin-top:2rem;
+    text-align: center;
+  }
   &__buttons{
     width: 60%;
     margin: 2rem auto 0;
@@ -242,6 +300,10 @@ input {
     &--direction{
       margin-left: 1rem;
     }
+    
+  }
+  @include desktop {
+    width:70%;
   }
 
 }
@@ -279,16 +341,33 @@ input {
         background: rgb(243, 120, 120);
       }
     }
+    &__submit {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      box-shadow: 3px 3px  $color-light-sec;
+      margin-top:1rem;
+      background: tomato;
+      color:white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      width: 90px;
+      height: 50px;
+      font-size: 1.5rem;
+      &:hover{
+        background: rgb(243, 120, 120);
+      }
+    } 
+    &__toggle {
+      border:none;
+      background: $color-light;
+      cursor: pointer;
+    }
   }
 
 
-.preview {
-    background: rgb(0, 252, 210);
-    width:50px;
-    height:50px;
-    border: 1px solid yellow;
 
-}
   
 .yes {
   color: rgb(51, 46, 196);

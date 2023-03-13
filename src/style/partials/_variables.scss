@@ -1,14 +1,17 @@
 // fonts
-$font-primary: 'AvenirNext LT Pro', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300;400;500;700&family=Short+Stack&display=swap');
+
+$font-primary: 'Short Stack', cursive;
 // primary colors
 $color-dark: rgb(2, 2, 85);
 $color-dark-opacity: rgba(50, 50, 50, 0.50);
 $color-light: #67b4e2;
+$color-light-transparent: rgb(105, 182, 227, 0.2);
 $color-accent: #FFFFFF;
 // secondary colors
 $color-dark-sec: #000000;
-$color-light-sec: #E1E1E1;
-$color-accent-sec: #FAFAFA;
+$color-light-sec: #a9dbf8;
+$color-accent-sec: #555454;
 // screen sizes
 $tablet-width: 768px;
 $desktop-width: 1100px;
