@@ -1,4 +1,7 @@
 import React from "react";
+import img1 from "../assets/images/pic02.png";
+import img2 from "../assets/images/pic03.png";
+import img3 from "../assets/images/pic04.png";
 
 function Rules() {
   return (
@@ -9,6 +12,7 @@ function Rules() {
           <li className="rules__item">
             To play this game you need to move the ducky to the red square.
           </li>
+          \]-[;po9iuterdsa76UYI98P0\=]
           <li className="rules__item">
             To move you will have same number of squares each turn which will
             start in the top left corner.
@@ -26,15 +30,9 @@ function Rules() {
       </div>
       <div className="rules__div">
         <div className="rules__wrapper">
-          <div className="rules__divEx">
-            <img src="../assets/images/pic02.png" alt="image failed to load" />
-          </div>
-          <div className="rules__divEx">
-            <img src="../assets/images/pic03.png" alt="image failed to load" />
-          </div>
-          <div className="rules__divEx">
-            <img src="../assets/images/pic04.png" alt="image failed to load" />
-          </div>
+          <div className="rules__divEx1"></div>
+
+          <div className="rules__divEx2"></div>
         </div>
       </div>
     </section>

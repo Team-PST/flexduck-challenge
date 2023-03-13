@@ -232,11 +232,29 @@ input {
     align-items: center;
     height: 100%;
   }
-  &__divEx{
-    width: 150px;
-    height: 150px;
+  &__divEx1{
+    width: 250px;
+    height: 250px;
+    background-image: url('../assets/images/pic02.png');
+    background-size: cover;
     color:white;
-    background: black;
+    // background: black;
+  }
+  &__divEx2{
+    width: 250px;
+    height: 250px;
+    background-image: url('../assets/images/pic03.png');
+    background-size: cover;
+    color:white;
+    // background: black;
+  }
+  &__divEx3{
+    width: 250px;
+    height: 250px;
+    background-image: url('../assets/images/pic04.png');
+    background-size: cover;
+    color:white;
+    // background: black;
   }
   &__title {
     
