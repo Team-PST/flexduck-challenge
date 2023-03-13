@@ -147,7 +147,10 @@ function Game() {
   return (
     <>
       <div className="game">
-        <h1>Create the bridge necessary to get the duck to the end!</h1>
+        <h1 className="game__title">
+          Create the bridge necessary to get the duck to the end!
+        </h1>
+        <h4 className="game__title">Level 1</h4>
         <GameBoard
           className="grid"
           grid={grid}
@@ -172,22 +175,24 @@ function Game() {
               value={formData["justify-content"]}
             ></input>
             <input
-              className={`form--input form--text ${errorForm["align-items"]}`}
+              className={`form--bottom form--input form--text ${errorForm["align-items"]}`}
               name="align-items"
               placeholder="align-items:"
               onChange={handleChange}
               value={formData["align-items"]}
             ></input>
 
-            <button type="submit">Next</button>
+            <button className="button__submit" type="submit">
+              Next
+            </button>
           </form>
         </div>
         <div className="game__buttons">
           <div className="game__buttons--direction">
             {/* <button onClick={previewDown}>Button Down</button> */}
 
-            <button className="button__blank"></button>
-
+            {/* <button className="button__blank"></button> */}
+            {/* 
             <button className="button__dir" onClick={previewLocationsDown}>
               Down Preview
             </button>
@@ -195,7 +200,7 @@ function Game() {
           <div className="game__buttons--remove">
             <button className="button__remove" onClick={removePreview}>
               remove preview
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
