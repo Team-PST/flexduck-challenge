@@ -173,7 +173,7 @@ function pushDown(arrs, boardEdge) {
   return arrs;
 }
 
-function centerYAxis(arrs, boardEdge) {
+function centerXAxis(arrs, boardEdge) {
   const center = Math.floor(boardEdge / 2);
   for (let arr of arrs) {
     arr[1] += center;
@@ -181,7 +181,7 @@ function centerYAxis(arrs, boardEdge) {
   return arrs;
 }
 
-function centerXAxis(arrs, boardEdge) {
+function centerYAxis(arrs, boardEdge) {
   const center = Math.floor(boardEdge / 2);
   for (let arr of arrs) {
     arr[0] += center;

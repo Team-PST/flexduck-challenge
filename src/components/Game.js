@@ -75,11 +75,15 @@ function Game() {
       if (propStr === "align-items") {
         if (valueStr === "flex-end") {
           return pushDown;
+        } else if (valueStr === "center") {
+          return centerYAxis;
         }
       }
       if (propStr === "justify-content") {
         if (valueStr === "flex-end") {
           return pushRightRow;
+        } else if (valueStr === "center") {
+          return centerXAxis;
         }
       }
     }
@@ -87,11 +91,15 @@ function Game() {
       if (propStr === "align-items") {
         if (valueStr === "flex-end") {
           return pushDown;
+        } else if (valueStr === "center") {
+          return centerYAxis;
         }
       }
       if (propStr === "justify-content") {
         if (valueStr === "flex-end") {
           return pushLeft;
+        } else if (valueStr === "center") {
+          return centerXAxis;
         }
       }
     }
@@ -99,12 +107,16 @@ function Game() {
       if (propStr === "align-items") {
         if (valueStr === "flex-end") {
           return pushRightColumn;
+        } else if (valueStr === "center") {
+          return centerXAxis;
         }
       }
 
       if (propStr === "justify-content") {
         if (valueStr === "flex-end") {
           return pushDown;
+        } else if (valueStr === "center") {
+          return centerYAxis;
         }
       }
     }
@@ -112,11 +124,15 @@ function Game() {
       if (propStr === "align-items") {
         if (valueStr === "flex-end") {
           return pushRightColumn;
+        } else if (valueStr === "center") {
+          return centerXAxis;
         }
       }
       if (propStr === "justify-content") {
         if (valueStr === "flex-end") {
           return pushUp;
+        } else if (valueStr === "center") {
+          return centerYAxis;
         }
       }
     }
