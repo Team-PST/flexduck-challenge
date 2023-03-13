@@ -18,10 +18,17 @@ import GameBoard from "./GameBoard";
 
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
-  //initializing grid 5x5
-  const boardSize = 5;
-  const winCondition = [4, 4];
-  const initialGrid = createGrid(boardSize);
+  const levels = {
+    one: {
+      boardSize: 5,
+      winCondition: [4, 4],
+      initialDuckyLocation: [0, 0],
+    },
+    two: { boardSize: 5, winCondition: [0, 0], initialDuckyLocation: [4, 4] },
+  };
+  /*  future development: add obstacles and make them go in a certain way to have
+      them practice different properties more! */
+
   const initialErrorData = {
     "flex-direction": "no",
     "justify-content": "no",
@@ -32,7 +39,6 @@ function Game() {
     "justify-content": "",
     "align-items": "",
   };
-
   const flexProps = {
     "flex-direction": {
       row: previewRight,
@@ -56,19 +62,29 @@ function Game() {
   };
   //but keeping concerns separated for now
   const [formData, setFormData] = useState(initialFormData);
-  const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
-  const [previewQueue, setPreviewQueue] = useState([]);
+
+  //initializing grid 5x5
+
+  const initialGrid = createGrid(levels["one"].boardSize);
+  const [level, setLevel] = useState("one");
   const [previewLocations, setPreviewLocations] = useState([[]]);
-  const [start, setStart] = useState([0, 0]);
-  const [finishCoordinates, setFinishCoordinates] = useState(winCondition);
-  const [duckyLocation, setDuckyLocation] = useState(start);
+  const [duckyLocation, setDuckyLocation] = useState(
+    levels["one"].initialDuckyLocation
+  );
   const [die, setDie] = useState(3);
-  const [turnsTaken, setTurnsTaken] = useState(0);
   const [errorForm, setErrorForm] = useState(initialErrorData);
-  const [goal, setGoal] = useState([4, 4]);
+  const [goal, setGoal] = useState(levels["one"].winCondition);
+  const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
   //when it's row, justify-content = x axis and align-items = y axis
   //when it's column justify-content = y axis and align items = x axis
   //direction x or direction y
+  console.log(duckyLocation, goal);
+  function handleLevel(evt) {
+    const value = evt.target.value;
+    setLevel(value);
+    setDuckyLocation(levels[value].initialDuckyLocation);
+    setGoal(levels[value].winCondition);
+  }
 
   function getFunctionFromForm(flexDirectionStr, propStr, valueStr) {
     if (flexDirectionStr === "row") {
@@ -138,28 +154,30 @@ function Game() {
     }
   }
   function commitRoll(event) {
+    console.log("ducky Location", duckyLocation);
     event.preventDefault();
     const newGrid = [...grid];
     const duckyLocationStr = JSON.stringify(duckyLocation);
-    if (
-      JSON.stringify(previewLocations[0]) === duckyLocationStr ||
-      JSON.stringify(previewLocations[previewLocations.length - 1]) ===
-        duckyLocationStr
-    ) {
-      console.log(JSON.stringify(previewLocations[0]), duckyLocationStr);
+    if (JSON.stringify(previewLocations[0]) === duckyLocationStr) {
       for (let location of previewLocations) {
         newGrid[location[0]][location[1]] = 1;
       }
       setDuckyLocation(previewLocations[previewLocations.length - 1]);
       setPreviewLocations([[]]);
       setGrid(newGrid);
+      setFormData(initialFormData);
+      setErrorForm(initialErrorData);
     }
     if (
       JSON.stringify(goal) ===
-        JSON.stringify(previewLocations[previewLocations.length - 1]) ||
-      JSON.stringify(goal) === JSON.stringify(previewLocations[0])
+      JSON.stringify(previewLocations[previewLocations.length - 1])
     ) {
-      console.log("YAY! YOU MADE IT!");
+      alert("YAY! YOU MADE IT!");
+      setDuckyLocation(levels["one"].initialDuckyLocation);
+      setGrid(initialGrid);
+      setFormData(initialFormData);
+      setErrorForm(initialErrorData);
+      setPreviewLocations([[]]);
     }
   }
 
@@ -182,13 +200,13 @@ function Game() {
     let previewCoordinates = [[]];
 
     if (fn1 && typeof fn1 === "function") {
-      previewCoordinates = fn1(die, boardSize);
+      previewCoordinates = fn1(die, levels[level].boardSize);
     }
     if (fn2 && typeof fn2 === "function") {
-      previewCoordinates = fn2(previewCoordinates, boardSize - 1);
+      previewCoordinates = fn2(previewCoordinates, levels[level].boardSize - 1);
     }
     if (fn3 && typeof fn3 === "function") {
-      previewCoordinates = fn3(previewCoordinates, boardSize - 1);
+      previewCoordinates = fn3(previewCoordinates, levels[level].boardSize - 1);
     }
     setPreviewLocations(previewCoordinates);
   }
@@ -259,12 +277,23 @@ function Game() {
         <h1 className="game__title">
           Create the bridge necessary to get the duck to the end!
         </h1>
+        <h4 className="game__title">
+          <button className="game_title" value="one" onClick={handleLevel}>
+            {" "}
+            Level 1
+          </button>
+          <button value="two" onClick={handleLevel}>
+            {" "}
+            Level 2
+          </button>
+        </h4>
         <h4 className="game__title">Level 1</h4>
         <GameBoard
           className="grid"
           grid={grid}
           duckyLocation={duckyLocation}
           previewLocations={previewLocations}
+          winCondition={levels[level].winCondition}
         />
         <div>
           <form className="form" onSubmit={commitRoll}>

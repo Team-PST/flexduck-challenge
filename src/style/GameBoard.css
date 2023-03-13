@@ -53,6 +53,10 @@
     border: 1px solid rgb(0, 0, 0);
 
 }
+
+.bridge .red{
+    background-color: rgb(232, 0, 0);
+}
 .preview {
     background: rgb(0, 252, 210);
     width:50px;
