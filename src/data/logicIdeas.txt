@@ -1,0 +1,41 @@
+logic
+if duckyLocation is [0,0] = the user can enter in 
+flex-direction:row with justify-content:center 
+therefore ducky location would be [0,2]
+or
+flex-direction:column with align-items:center
+therefore ducky location would be [2,0]
+
+if duckyLocation is [0,2] = the user can enter in 
+flex-direction:column with align-items:center
+therefore ducky location would be [2,2]
+or
+flex-direction:row with justify-content:center
+therefore ducky location would be [0,4]
+
+
+if duckyLocation is [2,0] = the user can enter in 
+flex-direction:column with align-items:flex-end 
+therefore ducky location would be [0,4]
+or
+flex-direction:row with justify-content:flex-end
+therefore ducky location would be [2,2]
+
+if duckyLocation is [0,4] = the user can enter in 
+flex-direction:row with justify-content:center
+therefore ducky location would be [4,3]
+
+if duckyLocation is [2,2] = the user can enter in 
+flex-direction:row with justify-content:flex-end;
+therefore ducky location would be [2,4]
+or
+flex-direction:column with align-items:flex-end;
+therefore ducky location would be [4,2]
+
+if duckyLocation is [2,4] = the user can enter in 
+flex-direction:column with align-items:flex-end;
+therefore ducky location would be [4,4]
+
+if duckyLocation is [4,2] = the user can enter in 
+flex-direction:row with justify-content:flex-end;
+therefore ducky location would be [4,4]
