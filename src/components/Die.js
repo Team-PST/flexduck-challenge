@@ -14,7 +14,6 @@ function Die() {
     setNum(rand); // The maximum is exclusive and the minimum is inclusive
   }
 
-  console.log(num);
   return (
     <div onClick={getRandomInt} className="outside-die">
       <div className="inside-die">{num}</div>

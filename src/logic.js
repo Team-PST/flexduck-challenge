@@ -13,11 +13,11 @@
  * @returns {Array<Array<*>>} - The 2D array with the specified dimensions
  *   and all elements initialized to the specified value.
  */
-function createGrid(num1, num2) {
+function createGrid(num) {
   let grid = [];
-  for (let i = 0; i < num1; i++) {
+  for (let i = 0; i < num; i++) {
     let innerGrid = [];
-    for (let j = 0; j < num2; j++) {
+    for (let j = 0; j < num; j++) {
       innerGrid.push(0);
     }
     grid.push(innerGrid);
@@ -49,14 +49,15 @@ function previewUp(num, coordinates) {
 }
 
 //prototype for preview
-function column(num, coordinates) {
-  const y = coordinates[0];
-  const x = coordinates[1];
+function column(num) {
+  const y = 0;
+  const x = 0;
   const preview = [];
   const destinationY = y + num;
   for (let i = y; i < destinationY; i++) {
     preview.push([i, x]);
   }
+  console.log(preview);
   return preview; //[[1,0][2, 0]....]
 }
 
@@ -90,7 +91,7 @@ function previewRight(num) {
   for (let i = x; i < destinationX; i++) {
     preview.push([y, i]);
   }
-  console.log(preview);
+
   return preview;
 }
 
@@ -110,8 +111,9 @@ function previewRight(num) {
 //for i = arr.length - 1; i >= 0; i--
 //res.push(arr[i])
 // res = [0,4],[0,3]]
-function rowReverse(arrs, boardEdge) {
-  arrs = pushRight(arrs, boardEdge);
+function rowReverse(num, boardEdge) {
+  let arrs = previewRight(num);
+  arrs = pushRightRow(arrs, boardEdge - 1);
   let res = [];
   for (let i = arrs.length - 1; i >= 0; i--) {
     res.push(arrs[i]);
@@ -119,23 +121,30 @@ function rowReverse(arrs, boardEdge) {
   return res;
 }
 
-function columnReverse(arrs, boardEdge) {
-  let difference = boardEdge - (arrs.length - 1);
-  for (let arr of arrs) {
-    arr[0] += difference;
-  }
+function columnReverse(num, boardEdge) {
+  let arrs = column(num);
+  arrs = pushDown(arrs, boardEdge - 1);
   let res = [];
   for (let i = arrs.length - 1; i >= 0; i--) {
     res.push(arrs[i]);
   }
+  return res;
 }
 
 //need flex-direction
 //if reverse, push it to the left or top
-function pushRight(arrs, boardEdge) {
+function pushRightRow(arrs, boardEdge) {
   let difference = boardEdge - (arrs.length - 1);
   for (let arr of arrs) {
     arr[1] += difference;
+  }
+
+  return arrs;
+}
+
+function pushRightColumn(arrs, boardEdge) {
+  for (let arr of arrs) {
+    arr[1] = boardEdge;
   }
   return arrs;
 }
@@ -144,6 +153,38 @@ function pushLeft(arrs, boardEdge) {
   let difference = boardEdge - (arrs.length - 1);
   for (let arr of arrs) {
     arr[1] -= difference;
+  }
+  return arrs;
+}
+
+function pushUp(arrs, boardEdge) {
+  let difference = boardEdge - (arrs.length - 1);
+  for (let arr of arrs) {
+    arr[0] -= difference;
+  }
+  return arrs;
+}
+
+function pushDown(arrs, boardEdge) {
+  let difference = boardEdge - arrs[arrs.length - 1][0];
+  for (let arr of arrs) {
+    arr[0] += difference;
+  }
+  return arrs;
+}
+
+function centerYAxis(arrs, boardEdge) {
+  const center = Math.floor(boardEdge / 2);
+  for (let arr of arrs) {
+    arr[1] += center;
+  }
+  return arrs;
+}
+
+function centerXAxis(arrs, boardEdge) {
+  const center = Math.floor(boardEdge / 2);
+  for (let arr of arrs) {
+    arr[0] += center;
   }
   return arrs;
 }
@@ -157,4 +198,11 @@ export {
   previewDown,
   rowReverse,
   columnReverse,
+  pushRightRow,
+  pushRightColumn,
+  pushLeft,
+  pushUp,
+  pushDown,
+  centerXAxis,
+  centerYAxis,
 };

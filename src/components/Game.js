@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import {
   previewDown,
   previewRight,
-  previewLeft,
-  previewUp,
   createGrid,
   rowReverse,
   column,
   columnReverse,
+  pushRightRow,
+  pushRightColumn,
+  pushLeft,
+  pushUp,
+  pushDown,
+  centerXAxis,
+  centerYAxis,
 } from "../logic";
 import GameBoard from "./GameBoard";
 
 //maybe props are in app for difficulty? lets discuss on this
 function Game() {
   //initializing grid 5x5
-  const initialGrid = createGrid(5, 5);
+  const boardSize = 5;
+  const winCondition = [4, 4];
+  const initialGrid = createGrid(boardSize);
   const initialErrorData = {
     "flex-direction": "no",
     "justify-content": "no",
@@ -25,22 +32,6 @@ function Game() {
     "justify-content": "",
     "align-items": "",
   };
-  //but keeping concerns separated for now
-  const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
-  const [previewQueue, setPreviewQueue] = useState([]);
-  const [previewLocations, setPreviewLocations] = useState([[]]);
-  const [start, setStart] = useState([0, 0]);
-  const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
-  const [duckyLocation, setDuckyLocation] = useState(start);
-  const [die, setDie] = useState(3);
-  const [turnsTaken, setTurnsTaken] = useState(0);
-  const [formData, setFormData] = useState(initialFormData);
-  const [errorForm, setErrorForm] = useState(initialErrorData);
-  const [direction, setDirection] = useState("");
-  const [justify, setJustify] = useState("");
-  const [align, setAlign] = useState("");
-
-  function updateBoard() {}
 
   const flexProps = {
     "flex-direction": {
@@ -54,39 +45,106 @@ function Game() {
       "flex-start": "flex-start",
       "flex-end": "flex-end",
       "space-between": "space-between",
-      "space-around": "space-around",
-      "space-evenly": "space-evenly",
     },
     "justify-content": {
       center: "center",
-      "flex-start": "flex-start",
+      "flex-start": "retern stame",
       "flex-end": "flex-end",
       "space-between": "space-between",
-      "space-around": "space-around",
-      "space-evenly": "space-evenly",
     },
     // "align-items": ["end", "start", "center", "stretch", "baseline"],
   };
+  //but keeping concerns separated for now
+  const [formData, setFormData] = useState(initialFormData);
+  const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
+  const [previewQueue, setPreviewQueue] = useState([]);
+  const [previewLocations, setPreviewLocations] = useState([[]]);
+  const [start, setStart] = useState([0, 0]);
+  const [finishCoordinates, setFinishCoordinates] = useState(winCondition);
+  const [duckyLocation, setDuckyLocation] = useState(start);
+  const [die, setDie] = useState(3);
+  const [turnsTaken, setTurnsTaken] = useState(0);
+  const [errorForm, setErrorForm] = useState(initialErrorData);
+  const [goal, setGoal] = useState([4, 4]);
+  //when it's row, justify-content = x axis and align-items = y axis
+  //when it's column justify-content = y axis and align items = x axis
+  //direction x or direction y
 
-  function previewLocationsDown() {
-    //using preview down from the logic.js file
-    const previewCoordinates = previewDown(die, duckyLocation);
-    setPreviewLocations(previewCoordinates);
+  function getFunctionFromForm(flexDirectionStr, propStr, valueStr) {
+    if (flexDirectionStr === "row") {
+      if (propStr === "align-items") {
+        if (valueStr === "flex-end") {
+          return pushDown;
+        }
+      }
+      if (propStr === "justify-content") {
+        if (valueStr === "flex-end") {
+          return pushRightRow;
+        }
+      }
+    }
+    if (flexDirectionStr === "row-reverse") {
+      if (propStr === "align-items") {
+        if (valueStr === "flex-end") {
+          return pushDown;
+        }
+      }
+      if (propStr === "justify-content") {
+        if (valueStr === "flex-end") {
+          return pushLeft;
+        }
+      }
+    }
+    if (flexDirectionStr === "column") {
+      if (propStr === "align-items") {
+        if (valueStr === "flex-end") {
+          return pushRightColumn;
+        }
+      }
+
+      if (propStr === "justify-content") {
+        if (valueStr === "flex-end") {
+          return pushDown;
+        }
+      }
+    }
+    if (flexDirectionStr === "column-reverse") {
+      if (propStr === "align-items") {
+        if (valueStr === "flex-end") {
+          return pushRightColumn;
+        }
+      }
+      if (propStr === "justify-content") {
+        if (valueStr === "flex-end") {
+          return pushUp;
+        }
+      }
+    }
   }
-
-  function removePreview() {
-    setPreviewLocations([[]]);
-  }
-
   function commitRoll(event) {
     event.preventDefault();
     const newGrid = [...grid];
-    for (let location of previewLocations) {
-      newGrid[location[0]][location[1]] = 1;
+    const duckyLocationStr = JSON.stringify(duckyLocation);
+    if (
+      JSON.stringify(previewLocations[0]) === duckyLocationStr ||
+      JSON.stringify(previewLocations[previewLocations.length - 1]) ===
+        duckyLocationStr
+    ) {
+      console.log(JSON.stringify(previewLocations[0]), duckyLocationStr);
+      for (let location of previewLocations) {
+        newGrid[location[0]][location[1]] = 1;
+      }
+      setDuckyLocation(previewLocations[previewLocations.length - 1]);
+      setPreviewLocations([[]]);
+      setGrid(newGrid);
     }
-    setDuckyLocation(previewLocations[previewLocations.length - 1]);
-    setPreviewLocations([[]]);
-    setGrid(newGrid);
+    if (
+      JSON.stringify(goal) ===
+        JSON.stringify(previewLocations[previewLocations.length - 1]) ||
+      JSON.stringify(goal) === JSON.stringify(previewLocations[0])
+    ) {
+      console.log("YAY! YOU MADE IT!");
+    }
   }
 
   function handleErrorForm(name, state) {
@@ -96,32 +154,65 @@ function Game() {
     }));
   }
 
-  //############################################################################
-  /******************** CURRENTLY WORKING ON THIS ******************************/
   async function handleChange(evt) {
     evt.preventDefault();
     const name = evt.target.name;
     const value = evt.target.value;
-    const fnQueue = [];
     const newFormData = { ...formData, [name]: value };
     setFormData(newFormData);
-    const fn1 = verifyFlexProps("flex-direction", newFormData);
+    const fn1 = verifyFlexDirection("flex-direction", newFormData);
     const fn2 = verifyFlexProps("justify-content", newFormData);
     const fn3 = verifyFlexProps("align-items", newFormData);
-    let previewCoordinates;
-    if (fn1) {
-      previewCoordinates = fn1(die);
+    let previewCoordinates = [[]];
+
+    if (fn1 && typeof fn1 === "function") {
+      previewCoordinates = fn1(die, boardSize);
     }
-    if (fn2) {
-      previewCoordinates = fn2(previewCoordinates);
+    if (fn2 && typeof fn2 === "function") {
+      previewCoordinates = fn2(previewCoordinates, boardSize - 1);
     }
-    if (fn3) {
-      previewCoordinates = fn3(previewCoordinates);
+    if (fn3 && typeof fn3 === "function") {
+      previewCoordinates = fn3(previewCoordinates, boardSize - 1);
     }
     setPreviewLocations(previewCoordinates);
   }
-  //function to verfiyFlexProps
+
+  //validate correct flex prop with value
   function verifyFlexProps(name, newFormData) {
+    const flexBoxPropValue = newFormData[name].replace(/\s/g, "").split(":");
+    const flexBoxProperty = flexBoxPropValue[0];
+    const flexBoxValue = flexBoxPropValue[1];
+    const flexBoxDirectionArr = newFormData["flex-direction"]
+      .replace(/\s/g, "")
+      .split(":");
+    const flexBoxDirectionStr = flexBoxDirectionArr[1];
+    if (
+      flexBoxProperty === name &&
+      flexProps[flexBoxProperty] &&
+      flexProps[flexBoxProperty][flexBoxValue]
+    ) {
+      const fn = getFunctionFromForm(
+        flexBoxDirectionStr,
+        flexBoxProperty,
+        flexBoxValue
+      );
+
+      setErrorForm((prevErrorForm) => ({
+        ...prevErrorForm,
+        [name]: "yes",
+      }));
+      return fn;
+    } else {
+      setErrorForm((prevErrorForm) => ({
+        ...prevErrorForm,
+        [name]: "no",
+      }));
+      return false;
+    }
+  }
+
+  //function to validate correct flex-direction
+  function verifyFlexDirection(name, newFormData) {
     const flexBoxPropValue = newFormData[name].replace(/\s/g, "").split(":");
     const flexBoxProperty = flexBoxPropValue[0];
     const flexBoxValue = flexBoxPropValue[1];
@@ -145,7 +236,6 @@ function Game() {
       return false;
     }
   }
-  //############################################################################
 
   return (
     <>
@@ -190,15 +280,6 @@ function Game() {
             {/* <button onClick={previewDown}>Button Down</button> */}
 
             <button className="button__blank"></button>
-
-            <button className="button__dir" onClick={previewLocationsDown}>
-              Down Preview
-            </button>
-          </div>
-          <div className="game__buttons--remove">
-            <button className="button__remove" onClick={removePreview}>
-              remove preview
-            </button>
           </div>
         </div>
       </div>
