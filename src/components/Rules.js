@@ -10,13 +10,16 @@ function Rules() {
             To play this game you need to move the ducky to the red square.
           </li>
           <li className="rules__item">
-            To move you will have two squares each turn which will start in the
-            top left corner.
+            To move you will have three squares each turn which will start in
+            the top left corner.
           </li>
           <li className="rules__item">
-            You need to connect the new sqaures with the end of your last
-            squares by typing flexbox commmands into the input to move the
-            squares in the correct direction.
+            You need to connect the new sqaures with the end of your last square
+            by typing flexbox commmands into the input to move the squares in
+            the correct direction and end on the red square.
+          </li>
+          <li className="rules__item">
+            You can preview changes as you type the flexbox information.
           </li>
         </ul>
       </div>
