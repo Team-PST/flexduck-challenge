@@ -2,7 +2,6 @@ import Game from "./components/Game";
 import Rules from "../src/components/Rules";
 import "./style/GameBoard.scss";
 import ToUse from "./components/ToUse";
-import rubbery from "./assets/images/rubbeducky2.png";
 
 function App() {
   return (
