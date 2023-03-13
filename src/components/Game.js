@@ -87,6 +87,7 @@ function Game() {
     setPreviewLocations([[]]);
   }
 
+  //function for onSubmit with form
   function commitRoll(event) {
     event.preventDefault();
     const newGrid = [...grid];
