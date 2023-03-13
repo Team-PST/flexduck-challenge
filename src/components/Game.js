@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   previewDown,
   previewRight,
   previewLeft,
   previewUp,
   createGrid,
+  rowReverse,
+  column,
+  columnReverse,
 } from "../logic";
 import GameBoard from "./GameBoard";
 
@@ -12,16 +15,27 @@ import GameBoard from "./GameBoard";
 function Game() {
   //initializing grid 5x5
   const initialGrid = createGrid(5, 5);
+  const initialErrorData = {
+    "flex-direction": "no",
+    "justify-content": "no",
+    "align-items": "no",
+  };
+  const initialFormData = {
+    "flex-direction": "",
+    "justify-content": "",
+    "align-items": "",
+  };
   //but keeping concerns separated for now
   const [grid, setGrid] = useState(initialGrid); //maybe use useMemo for optimization?
+  const [previewQueue, setPreviewQueue] = useState([]);
   const [previewLocations, setPreviewLocations] = useState([[]]);
   const [start, setStart] = useState([0, 0]);
   const [finishCoordinates, setFinishCoordinates] = useState([4, 4]);
   const [duckyLocation, setDuckyLocation] = useState(start);
   const [die, setDie] = useState(3);
   const [turnsTaken, setTurnsTaken] = useState(0);
-  const [formData, setFormData] = useState("");
-  const [errorForm, setErrorForm] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
+  const [errorForm, setErrorForm] = useState(initialErrorData);
   const [direction, setDirection] = useState("");
   const [justify, setJustify] = useState("");
   const [align, setAlign] = useState("");
@@ -29,57 +43,34 @@ function Game() {
   function updateBoard() {}
 
   const flexProps = {
-    "flex-direction": ["row", "row-reverse", "column", "column-reverse"],
-    "align-content": [
-      "center",
-      "flex-start",
-      "flex-end",
-      "space-between",
-      "space-around",
-      "space-evenly",
-    ],
-    "justify-content": [
-      "center",
-      "flex-start",
-      "flex-end",
-      "space-between",
-      "space-around",
-      "space-evenly",
-    ],
-    "align-items": ["end", "start", "center", "stretch", "baseline"],
+    "flex-direction": {
+      row: previewRight,
+      "row-reverse": rowReverse,
+      column: column,
+      "column-reverse": columnReverse,
+    },
+    "align-items": {
+      center: "center",
+      "flex-start": "flex-start",
+      "flex-end": "flex-end",
+      "space-between": "space-between",
+      "space-around": "space-around",
+      "space-evenly": "space-evenly",
+    },
+    "justify-content": {
+      center: "center",
+      "flex-start": "flex-start",
+      "flex-end": "flex-end",
+      "space-between": "space-between",
+      "space-around": "space-around",
+      "space-evenly": "space-evenly",
+    },
+    // "align-items": ["end", "start", "center", "stretch", "baseline"],
   };
 
-  /*preview: manipulate coordinates based on css and show them on a z-index: 2
-    with the preview having transluscent property, upon submit, we'll change the
-    grid accordingly. 
-    option 1: ducky's steps has to be in numerical order
-    option 2: dont make it numerical and have either the start or end start on
-              ducky location  */
-
-  //this is if it is just down
-  //requirements: preview location array state.
-  /*  returns 2d array of */
   function previewLocationsDown() {
     //using preview down from the logic.js file
     const previewCoordinates = previewDown(die, duckyLocation);
-    setPreviewLocations(previewCoordinates);
-  }
-
-  // moves duck down and is set to the number of spots rolled by the die
-  function previewLocationsUp() {
-    const previewCoordinates = previewUp(die, duckyLocation);
-    setPreviewLocations(previewCoordinates);
-  }
-
-  //moves duck left and is set to the number of spots rolled by the die
-  function previewLocationsLeft() {
-    const previewCoordinates = previewLeft(die, duckyLocation);
-    setPreviewLocations(previewCoordinates);
-  }
-
-  //moves duck right and is set to the number of spots rolled by the die
-  function previewLocationsRight() {
-    const previewCoordinates = previewRight(die, duckyLocation);
     setPreviewLocations(previewCoordinates);
   }
 
@@ -98,106 +89,63 @@ function Game() {
     setGrid(newGrid);
   }
 
-  //function for getting input from form
-  //only if everything is validated, we can
-  //make the 'next' button pressable
-  //send the info to the logic
-  function verifyForm(event) {
-    //event.target.value == "column?"
-    event.preventDefault();
-    if (direction && justify && align) {
-      console.log("send info to logic 🚀");
-    }
-  }
-
-  function handleChange(evt) {
-    let name = evt.target.name;
-    let val = evt.target.value;
-    verfiyDirection(name, val, evt);
-    verifyContent(name, val, evt);
-    verifyAlign(name, val, evt);
-    setFormData((fData) => ({
+  function handleErrorForm(name, state) {
+    setErrorForm((fData) => ({
       ...fData,
-      [name]: val,
+      [name]: state,
     }));
   }
 
-  //function to verfiyDirection
-  function verfiyDirection(name, val, evt) {
-    //event.target.value == "column?"
+  //############################################################################
+  /******************** CURRENTLY WORKING ON THIS ******************************/
+  async function handleChange(evt) {
     evt.preventDefault();
-    const flexBoxOption = val.split(":")[0];
-    const flexBoxDirection = val.split(":")[1];
-    //console.log(name);
-    //checking to so if the name equals the the flex-direction
-    if (name === "flex-direction") {
-      //if box option is equal to
-      if (flexBoxOption === "flex-direction") {
-        //loop through the flexbox options and then do
-        const found = flexProps["flex-direction"].find(
-          (element) => flexBoxDirection === element
-        );
-        if (found === undefined) {
-          setErrorForm(true);
-          //once the setErrorForm is true the warning comes up
-        } else {
-          setDirection(found);
-        }
-      }
+    const name = evt.target.name;
+    const value = evt.target.value;
+    const fnQueue = [];
+    const newFormData = { ...formData, [name]: value };
+    setFormData(newFormData);
+    const fn1 = verifyFlexProps("flex-direction", newFormData);
+    const fn2 = verifyFlexProps("justify-content", newFormData);
+    const fn3 = verifyFlexProps("align-items", newFormData);
+    let previewCoordinates;
+    if (fn1) {
+      previewCoordinates = fn1(die);
     }
+    if (fn2) {
+      previewCoordinates = fn2(previewCoordinates);
+    }
+    if (fn3) {
+      previewCoordinates = fn3(previewCoordinates);
+    }
+    setPreviewLocations(previewCoordinates);
   }
+  //function to verfiyFlexProps
+  function verifyFlexProps(name, newFormData) {
+    const flexBoxPropValue = newFormData[name].replace(/\s/g, "").split(":");
+    const flexBoxProperty = flexBoxPropValue[0];
+    const flexBoxValue = flexBoxPropValue[1];
+    if (
+      flexBoxProperty === name &&
+      flexProps[flexBoxProperty] &&
+      flexProps[flexBoxProperty][flexBoxValue]
+    ) {
+      const fn = flexProps[flexBoxProperty][flexBoxValue];
 
-  //function to verfiy justify content
-  function verifyContent(name, val, evt) {
-    //event.target.value == "column?"
-    evt.preventDefault();
-    const justifyOption = val.split(":")[0];
-    const justifyDirection = val.split(":")[1];
-    console.log(name);
-    //checking to so if the name equals the the flex-direction
-    if (name === "justify-content") {
-      console.log("yes");
-      //if box option is equal to
-      if (justifyOption === "justify-content") {
-        //loop through the flexbox options and then do
-        const found = flexProps["justify-content"].find(
-          (element) => justifyDirection === element
-        );
-        if (found === undefined) {
-          setErrorForm(true);
-          //once the setErrorForm is true the warning comes up
-        } else {
-          setJustify(found);
-        }
-      }
+      setErrorForm((prevErrorForm) => ({
+        ...prevErrorForm,
+        [name]: "yes",
+      }));
+      return fn;
+    } else {
+      setErrorForm((prevErrorForm) => ({
+        ...prevErrorForm,
+        [name]: "no",
+      }));
+      return false;
     }
   }
-
-  //function to verfiy align items
-  function verifyAlign(name, val, evt) {
-    //event.target.value == "column?"
-    evt.preventDefault();
-    const alignOption = val.split(":")[0];
-    const alignDirection = val.split(":")[1];
-    //console.log(name);
-    //checking to so if the name equals the the flex-direction
-    if (name === "align-items") {
-      //if box option is equal to
-      if (alignOption === "align-items") {
-        //loop through the flexbox options and then do
-        const found = flexProps["align-items"].find(
-          (element) => alignDirection === element
-        );
-        console.log(found);
-        if (found === undefined) {
-          setErrorForm(true);
-          //once the setErrorForm is true the warning comes up
-        } else {
-          setAlign(found);
-        }
-      }
-    }
-  }
+  //############################################################################
 
   return (
     <>
@@ -213,21 +161,21 @@ function Game() {
           <form className="form" onSubmit={commitRoll}>
             <p className="form--top">display:flex;</p>
             <input
-              className="form--input form--text"
+              className={`form--input form--text ${errorForm["flex-direction"]}`}
               name="flex-direction"
               placeholder="flex-direction:"
               onChange={handleChange}
               value={formData["flex-direction"]}
             ></input>
             <input
-              className="form--input form--text"
+              className={`form--input form--text ${errorForm["justify-content"]}`}
               name="justify-content"
               placeholder="justify-content:"
               onChange={handleChange}
               value={formData["justify-content"]}
             ></input>
             <input
-              className="form--bottom form--text"
+              className={`form--input form--text ${errorForm["align-items"]}`}
               name="align-items"
               placeholder="align-items:"
               onChange={handleChange}
@@ -242,18 +190,9 @@ function Game() {
             {/* <button onClick={previewDown}>Button Down</button> */}
 
             <button className="button__blank"></button>
-            <button className="button__dir" onClick={previewLocationsUp}>
-              Up Preview
-            </button>
-            <button className="button__blank"></button>
-            <button className="button__dir" onClick={previewLocationsLeft}>
-              Left Preview
-            </button>
+
             <button className="button__dir" onClick={previewLocationsDown}>
               Down Preview
-            </button>
-            <button className="button__dir" onClick={previewLocationsRight}>
-              Right Preview
             </button>
           </div>
           <div className="game__buttons--remove">

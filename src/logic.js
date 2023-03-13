@@ -82,9 +82,9 @@ function previewDown(num, coordinates) {
   }
   return preview; //[[1,0][2, 0]....]
 }
-function previewRight(num, coordinates) {
-  const y = coordinates[0];
-  const x = coordinates[1];
+function previewRight(num) {
+  const y = 0;
+  const x = 0;
   const preview = [];
   const destinationX = x + num;
   for (let i = x; i < destinationX; i++) {
@@ -155,4 +155,6 @@ export {
   previewRight,
   createGrid,
   previewDown,
+  rowReverse,
+  columnReverse,
 };
