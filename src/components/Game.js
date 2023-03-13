@@ -287,7 +287,7 @@ function Game() {
             Level 2
           </button>
         </h4>
-        <h4 className="game__title">Level 1</h4>
+        {/* <h4 className="game__title">Level 1</h4> */}
         <GameBoard
           className="grid"
           grid={grid}

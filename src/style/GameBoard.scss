@@ -27,6 +27,11 @@
     width: 80%;
     text-align: center;
   }
+  &__titleText{
+    font-size: 1rem;
+    @include tablet{
+    font-size: 1.5rem;}
+  }
 }
 .gameboard{
   width: auto;
@@ -228,9 +233,15 @@ input {
   }
   &__wrapper{
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    
     height: 100%;
+    @include tablet{
+      flex-direction: row;
+
+    }
   }
   &__divEx1{
     width: 250px;
@@ -241,11 +252,15 @@ input {
     // background: black;
   }
   &__divEx2{
+    margin-top: 1rem;
     width: 250px;
     height: 250px;
     background-image: url('../assets/images/pic03.png');
     background-size: cover;
     color:white;
+    @include tablet {
+      margin-top: 0;
+    }
     // background: black;
   }
   &__divEx3{
