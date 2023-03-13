@@ -53,9 +53,13 @@
   transition: all 5s;
   z-index:-1;
   animation:wave 1.5s linear infinite;
+  
 
 }
-
+.num{
+  z-index: 2;
+  color:black;
+}
 //interior wave
 // .wave:before {
 //   content:"";

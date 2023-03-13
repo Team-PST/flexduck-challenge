@@ -53,9 +53,6 @@ function Game() {
       center: "center",
       "flex-start": "flex-start",
       "flex-end": "flex-end",
-      "space-between": "space-between",
-      "space-around": "space-around",
-      "space-evenly": "space-evenly",
     },
     "justify-content": {
       center: "center",
@@ -108,7 +105,7 @@ function Game() {
     const fn1 = verifyFlexProps("flex-direction", newFormData);
     const fn2 = verifyFlexProps("justify-content", newFormData);
     const fn3 = verifyFlexProps("align-items", newFormData);
-    let previewCoordinates;
+    let previewCoordinates = [[]];
     if (fn1) {
       previewCoordinates = fn1(die);
     }

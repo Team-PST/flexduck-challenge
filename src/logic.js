@@ -152,47 +152,62 @@ function pushLeft(arrs, boardEdge) {
 //this function determines the ducky location and what input returns the future ducky location
 function options(duckyLocation, direction, justify, align) {
   if (duckyLocation === [0, 0]) {
-    if (direction === "row" && justify === "center") {
+    if (direction === "row") {
       return; //new duckyLocation [0,2]
-    } else if (direction === "column" && align === "center") {
+    } else if (direction === "column") {
       return; //new duckyLocation [2,0]
     }
 
-    if (duckyLocation === [0, 2]) {
-      if (direction === "row" && justify === "center") {
-        return; //new duckyLocation [2,2]
-      } else if (direction === "column" && align === "center") {
+    if (duckyLocation === [2, 0]) {
+      if (direction === "row" && justify === "flex-end") {
+        return; //new duckyLocation [4,0]
+      } else if (direction === "column" && justify === "flex-end") {
         return; //new duckyLocation [0,4]
       }
     }
-    if (duckyLocation === [2, 0]) {
-      if (direction === "row" && justify === "flex-end") {
-        return; //new duckyLocation [0,4]
+    if (duckyLocation === [4, 0]) {
+      if (direction === "col" && align === "flex-end") {
+        return; //new duckyLocation [4,2]
       } else if (direction === "column" && align === "flex-end") {
         return; //new duckyLocation [2,2]
       }
     }
-    if (duckyLocation === [0, 4]) {
-      if (direction === "column" && justify === "center") {
-        return; //new duckyLocation [4,2]
+
+    if (duckyLocation === [0, 2]) {
+      if (direction === "row" && align === "center") {
+        return; //new duckyLocation [2,2]
+      } else if (direction === "column" && justify === "flex-end") {
+        return; //new duckyLocation [0,4]
       }
     }
 
     if (duckyLocation === [2, 2]) {
-      if (direction === "row" && justify === "flex-end") {
-        return; //new duckyLocation [2,4]
-      } else if (direction === "column" && align === "flex-end") {
+      if (direction === "row" && justify === "center" && align === "flex-end") {
         return; //new duckyLocation [4,2]
+      } else if (
+        direction === "column" &&
+        justify === "flex-end" &&
+        align === "flex-end"
+      ) {
+        return; //new duckyLocation [2,4]
       }
     }
-
     if (duckyLocation === [2, 4]) {
-      if (direction === "row" && justify === "flex-end") {
+      if (
+        direction === "row" &&
+        justify === "flex-end" &&
+        align === "flex-end"
+      ) {
         return; //new duckyLocation [4,4]
       }
     }
+
     if (duckyLocation === [4, 2]) {
-      if (direction === "column" && align === "flex-end") {
+      if (
+        direction === "column" &&
+        justify === "flex-end" &&
+        align === "flex-end"
+      ) {
         return; //new duckyLocation [4,4]
       }
     }
