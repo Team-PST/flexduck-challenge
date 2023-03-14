@@ -33,3 +33,5 @@
 
 <li>Add more flexbox challenges</li>
 <li>Add levels</li>
+<li>Add Obstacles(for space between)</li>
+<li>Increase board size and allow them to choose parent div choosing drag click</li>
