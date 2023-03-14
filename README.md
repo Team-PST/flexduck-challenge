@@ -6,6 +6,8 @@
 
 ## 🚀 Demo
 
+[https://flexduck-challenge.netlify.app/](https://flexduck-challenge.netlify.app/)
+
 ## 📸 Images
 ![Home page](./src/assets/images/pic02.png "Homepage")
 ## 💻 Built with
