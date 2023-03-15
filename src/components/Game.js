@@ -278,11 +278,16 @@ function Game() {
           Create the bridge necessary to get the duck to the end!
         </h1>
         <h4 className="game__title">
-          <button className="game_title" value="one" onClick={handleLevel}>
+          <button
+            tabindex="1"
+            className="game_title"
+            value="one"
+            onClick={handleLevel}
+          >
             {" "}
             Level 1
           </button>
-          <button value="two" onClick={handleLevel}>
+          <button tabindex="2" value="two" onClick={handleLevel}>
             {" "}
             Level 2
           </button>
@@ -299,6 +304,7 @@ function Game() {
           <form className="form" onSubmit={commitRoll}>
             <p className="form--top">display:flex;</p>
             <input
+              tabindex="3"
               className={`form--input form--text ${errorForm["flex-direction"]}`}
               name="flex-direction"
               placeholder="flex-direction:"
@@ -306,6 +312,7 @@ function Game() {
               value={formData["flex-direction"]}
             ></input>
             <input
+              tabindex="4"
               className={`form--input form--text ${errorForm["justify-content"]}`}
               name="justify-content"
               placeholder="justify-content:"
@@ -313,6 +320,7 @@ function Game() {
               value={formData["justify-content"]}
             ></input>
             <input
+              tabindex="5"
               className={`form--bottom form--input form--text ${errorForm["align-items"]}`}
               name="align-items"
               placeholder="align-items:"
@@ -320,17 +328,18 @@ function Game() {
               value={formData["align-items"]}
             ></input>
 
-            <button className="button__submit" type="submit">
+            <button tabindex="6" className="button__submit" type="submit">
               Next
             </button>
           </form>
         </div>
-        <div className="game__buttons">
+        {/* dev purposes to test movement */}
+        {/* <div className="game__buttons">
           <div className="game__buttons--direction">
-            {/* <button onClick={previewDown}>Button Down</button> */}
+            <button onClick={previewDown}>Button Down</button>
 
-            {/* <button className="button__blank"></button> */}
-            {/* 
+            <button className="button__blank"></button>
+            
             <button className="button__dir" onClick={previewLocationsDown}>
               Down Preview
             </button>
@@ -338,9 +347,9 @@ function Game() {
           <div className="game__buttons--remove">
             <button className="button__remove" onClick={removePreview}>
               remove preview
-            </button> */}
+            </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
