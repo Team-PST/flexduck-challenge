@@ -16,10 +16,15 @@ function Rules() {
           <li className="rules__item">
             You need to connect the new sqaures with the end of your last square
             by typing flexbox commmands into the input to move the squares in
-            the correct direction and end on the red square. Each move, you will
-            be putting down the bridges on a new z-index so don't worry about
-            the previous bridges placed! SQUARE No. 1 MUST ALWAYS START WHERE
-            THE DUCKY IS!
+            the correct direction and end on the red square.
+          </li>
+          <li className="rules__item">
+            Each move, you will be putting down the bridges on a new z-index so
+            don't worry about the previous bridges placed!
+          </li>
+          <li className="rules__item">
+            Bridge number will always have to start where the ducky is currently
+            in.
           </li>
           <li className="rules__item">
             You can preview changes as you type the flexbox information.
