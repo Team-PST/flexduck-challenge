@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 
 function Die() {
   //use state to pass this number to the game, therefore since we can't pass up, this die will need to be
