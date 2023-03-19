@@ -1,19 +1,23 @@
-# 🦆FlexDuck
- Flexduck was created to teach new front-end developers of how to utilize
- the css layout model, flexbox. With this game, we will teach you the
- flexbox directions through justify content, align items and
- flex-direction
+# 🐥FlexDuck🐤
+ Hackathon project within a team of two software developers.  Flexduck was created to teach new front-end developers how to utilize
+ the css layout model, flexbox. Flexduck will teach you the
+ flexbox directions, justify content, and align items.  Paired programming, github repos, and strong communication were used to implement this project between two 
+ developers who had not previously known each other.
 
-## 🚀 Demo
+## 🚀 Deployed
 
 [Flex duck challenge!](https://flexduck-challenge.netlify.app/)
 
-## 📸 Images
+## 📸 Images/Demo
 ![Home page](./src/assets/images/pic02.png "Homepage")
+
+![React App - Google Chrome 2023-03-19 09-40-56](https://user-images.githubusercontent.com/66695865/226191502-6da7bcc1-b739-4235-af6d-888aa05e7ad0.gif)
+
 ## 💻 Built with
 <li>React</li>
-<li>CSS</li>
-<li>Teamwork!!</li>
+<li>Javascript</li>
+<li>Sass</li>
+
 
 ## 🛠️ Installation Steps:
 1. To start using this app you first need to clone the repository:
