@@ -11,10 +11,14 @@ function ToUse() {
   //the state for the chevron image
   const [chevron, setChevron] = useState(false);
 
-  //toggle function for drop down
-  function toggle() {
-    //if selected the question drop down, compare previous state
-    setIsShown((prevCheck) => !prevCheck);
+  function showInfo(category) {
+    console.log(category);
+    //setActiveTheme(category);
+    setIsShown((prev) =>
+      Boolean(!prev[category])
+        ? { ...prev, [category]: true }
+        : { ...prev, [category]: false }
+    );
     setChevron(!chevron);
   }
 
@@ -36,27 +40,28 @@ function ToUse() {
                 className=""
                 src={chevronUp}
                 alt="chevron down "
-                onClick={() => toggle()}
+                onClick={() => showInfo("row")}
               />
             ) : (
               <img
                 className=""
                 src={chevronDown}
                 alt="chevron up"
-                onClick={() => toggle()}
+                onClick={() => showInfo("row")}
               />
             )}
           </button>
         </p>
-        {chevron === false ? (
-          <div></div>
-        ) : (
+
+        {isShown["row"] ? (
           <ul>
             <li>row</li>
             <li>row-reverse</li>
             <li>column-reverse</li>
             <li>column</li>
           </ul>
+        ) : (
+          <div></div>
         )}
       </div>
       <div className="toUse__justify">
@@ -76,21 +81,19 @@ function ToUse() {
                 className=""
                 src={chevronUp}
                 alt="chevron down "
-                onClick={() => toggle()}
+                onClick={() => showInfo("justify")}
               />
             ) : (
               <img
                 className=""
                 src={chevronDown}
                 alt="chevron up"
-                onClick={() => toggle()}
+                onClick={() => showInfo("justify")}
               />
             )}
           </button>
         </p>
-        {chevron === false ? (
-          <div></div>
-        ) : (
+        {isShown["justify"] ? (
           <ul>
             <li>center</li>
             <li>flex-start</li>
@@ -99,6 +102,8 @@ function ToUse() {
             <li>space-around</li>
             <li>space-evenly</li>
           </ul>
+        ) : (
+          <div></div>
         )}
       </div>
 
@@ -119,25 +124,25 @@ function ToUse() {
                 className=""
                 src={chevronUp}
                 alt="chevron down "
-                onClick={() => toggle()}
+                onClick={() => showInfo("align")}
               />
             ) : (
               <img
                 className=""
                 src={chevronDown}
                 alt="chevron up"
-                onClick={() => toggle()}
+                onClick={() => showInfo("align")}
               />
             )}
           </button>
         </p>
-        {chevron === false ? (
-          <div></div>
-        ) : (
+        {isShown["align"] ? (
           <ul>
             <li>end</li> <li>start</li> <li>center</li> <li>stretch</li>
             <li>baseline</li>
           </ul>
+        ) : (
+          <div></div>
         )}
       </div>
     </div>
